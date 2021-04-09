@@ -1,1 +1,67 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --pk:#88205e;
+  --prk:#c235dc;
+  --prkl: #a582ce;
+}
+
+.bg-gradient-secondary-cus {
+  background-color: var(--prk);
+  background-image: linear-gradient(122deg, #96a8c7a9 10%, #e8f0fe 100%);
+  background-size: cover;
+}
+.bg-gradient-secondary-cus a{
+  color:black;
+}
+.text-prk {
+  color: #710eb9 !important;
+}
+.nav-cus{
+  border:1px solid #710eb9;
+  box-shadow:1px 1px #d4b5c9;
+  padding: 10px;
+}
+.nav-cus .nav-item a{
+  color: black;
+}
+.text-xs {
+  font-size: .7rem;
+}
+.nav-cus .active {
+  background-color: #9d7fb3 !important;
+}
+ .top {
+  background-image: linear-gradient(181deg, #96a8c7a9 10%, #e8f0fe 100%) !important;
+
+}
+.bg-secondary-cus {
+  background-color: var(--prk) !important;
+}
+
+a.bg-secondary-cus:hover, a.bg-secondary-cus:focus,
+button.bg-secondary-cus:hover,
+button.bg-secondary-cus:focus {
+  background-color: var(--prk) !important;
+}
+.pointer{
+  cursor:pointer;
+}
+.btn-pink {
+  color: #fff;
+  background-color: #9b1d6a;
+  border-color: #df4ebb;
+}
+
+.btn-pink:hover {
+  color: #fff;
+  background-color: pink;
+  border-color: #723463;
+}
+.btn-pink:focus {
+  color: #fff;
+  background-color: pink;
+  border-color: #723463;
+}
+.dropdown.no-arrow .dropdown-toggle::after {
+  display: none;
+}
