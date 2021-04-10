@@ -9,7 +9,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TaskComponent } from './task/task.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { UsersComponent } from './users/users.component';
+import { NewUserComponent } from './new-user/new-user.component';
+import {FormsModule } from '@angular/forms'
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,10 +21,12 @@ import { ProfileComponent } from './profile/profile.component';
     DashboardComponent,
     TaskComponent,
     AdministrationComponent,
-    ProfileComponent
+    ProfileComponent,
+    UsersComponent,
+    NewUserComponent
   ],
   imports: [
-    BrowserModule, NgbModule
+    BrowserModule, NgbModule,FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

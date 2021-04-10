@@ -1,0 +1,40 @@
+<div class="row g-2" *ngIf="!newperson">
+
+  <!-- user list -->
+  <div class="col-md-3" *ngFor="let user of users">
+    <div class="card">
+      <img class="img-profile p-3 card-img-top user-img rounded-circle" src="../../assets/img/user1-128x128.jpg"  height="50">
+      <div class="card-body body-info">
+        <h5 class="card-title">{{user?.fullName || 'user.fulname'}}</h5>
+        <div class="form-group">
+          <label for="">Prenom:</label>
+          <p class="form-text text-prk">
+            {{user?.lastName || 'user.prenom'}}
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="">Contact:</label>
+          <p class="form-text text-prk">
+            {{user?.phone || 'user.Contact'}}
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+</div>
+<div class="row">
+<!-- new user -->
+<app-new-user (closeNewPerson)="closeAddPerson()" *ngIf="newperson" class="col-md-6 "></app-new-user>
+</div>
+<a class="float-right float" (click)="addperson()" [hidden]="hided" role="button" id="plus">
+  <i class="fa fa-plus-circle fs-1 text-prk"></i>
+</a>

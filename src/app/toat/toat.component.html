@@ -1,5 +1,5 @@
 
-  <div class="position top-0  text-dark text-center" [class]="{'bg-success': issuccess, 'bg-warning': !issuccess}">
+  <div class="position top-0  text-dark text-center" [class]="{'bg-success': variant=='success', 'bg-warning': variant=='warning' }">
     <ngb-toast [autohide]="true" (hidden)="show=false"
       [delay]="toast?.delay || 5000">
       {{msg}}

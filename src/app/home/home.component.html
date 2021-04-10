@@ -54,7 +54,7 @@
   </div>
 </nav>
 <!-- nav link -->
-<ul class="nav nav-pills nav-fill nav-cus">
+<ul class="nav nav-pills nav-fill nav-cus p-0 ">
   <li class="nav-item" (click)="nav.select(1)">
     <a class="nav-link " [class]="active==1?'active':''" aria-current="page" href="#"  >
       <i class="fa fa-home fs-3 d-lg-none d-sm-block d-md-block" aria-hidden="true"></i>
@@ -81,7 +81,7 @@
       </a>
 
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item pointer" ngbDropdownItem (click)="open(content)">
+      <a class="dropdown-item pointer" ngbDropdownItem >
         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
         acticities
       </a>

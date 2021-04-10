@@ -1,0 +1,20 @@
+
+.btn-submit:not(:disabled) {
+  color: black;
+  border-radius: 5px;
+  padding: 0.75rem 1rem;
+  border: 1px rgb(233, 193, 231) solid !important;
+  background-color: #9d7fb3 ;
+}
+.primary {
+  background-color: #cbadf3 !important;
+}
+
+.btn-submit:hover:not(:disabled) {
+  color: #fff;
+  background-position: left bottom;
+}
+.btn-submit:disabled {
+  color: #fff;
+  background-color: #07020a !important;
+}

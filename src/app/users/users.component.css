@@ -1,0 +1,16 @@
+.float{
+  opacity: 0.7;
+  position: fixed;
+  right: 12px;
+  bottom: 60px;
+  z-index: 22;
+}
+.body-info{
+  position: relative;
+  left: 50px;
+  top: 10px;
+}
+.user-img{
+  width: 40%!important;
+    height: 40%!important;
+}

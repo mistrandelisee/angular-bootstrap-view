@@ -6,9 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./toat.component.css']
 })
 export class ToatComponent implements OnInit {
-  @Input() show:boolean = true;
+  @Input() show:boolean = false;
   toast:any;
-  @Input() issuccess:boolean=false;
+  @Input() variant:string='warning';
   @Input() msg:string='';
 
   constructor() {
