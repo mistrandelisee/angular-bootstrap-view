@@ -1,40 +1,92 @@
-<div class="row g-2" *ngIf="!newperson">
+<div class="container" *ngIf="!newperson">
+  <div class="row g-2 mb-3">
+    <div class="col-md">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input"  name="choix" id="choix"
+        [(ngModel)]="search.choix" [value]="search.choix" >
+        choix0
+      </label>
 
-  <!-- user list -->
-  <div class="col-md-3" *ngFor="let user of users">
-    <div class="card">
-      <img class="img-profile p-3 card-img-top user-img rounded-circle" src="../../assets/img/user1-128x128.jpg"  height="50">
-      <div class="card-body body-info">
-        <h5 class="card-title">{{user?.fullName || 'user.fulname'}}</h5>
-        <div class="form-group">
-          <label for="">Prenom:</label>
-          <p class="form-text text-prk">
-            {{user?.lastName || 'user.prenom'}}
-          </p>
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-submit active">choix1
+          <input type="radio" class="form-radio-input" name="choix" id="" autocomplete="off" >
+        </label>
+        <label class="btn btn-submit">choix2
+          <input type="radio" name="choix" id="" autocomplete="off">
+        </label>
+        <label class="btn btn-submit">choix3
+          <input type="radio" name="choix" id=" " autocomplete="off ">
+        </label>
+      </div>
+      <i class="fa fa-filter float-right" aria-hidden="true"></i>
+    </div>
+    <div class="col-md" >
+
+      <form  #form="ngForm" (ngSubmit)="doSearch()" class="float-right w-75 d-none d-sm-inline-block form-inline navbar-search">
+        <div class="input-group form-floating">
+          <input id="search-bar" type="text" class="search-bar form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"
+          [(ngModel)]="search.input" name="sc" #searchinpu="ngModel"
+          >
+
+          <label for="search-bar text text-muted">Search for name</label>
+          <div class="input-group-append">
+            <button class="btn btn-pink"   type="submit">
+              <i class="fas fa-search fa-sm"></i>
+            </button>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="">Contact:</label>
-          <p class="form-text text-prk">
-            {{user?.phone || 'user.Contact'}}
-          </p>
+      </form>
+    </div>
+
+  </div>
+  <div class="row g-2" >
+
+    <!-- user list -->
+    <div class="col-md-3" *ngFor="let user of users">
+      <div class="card" [class]="user?.active ?'active-border':''">
+        <img class="img-profile p-3 card-img-top user-img rounded-circle" src="../../assets/img/user1-128x128.jpg"  height="50">
+        <div class=" row  action-button end-10">
+          <div class="col-12">
+            <a class="btn btn-primary mx-1 float-right" >{{user?.active ? 'Dismiss' : 'Activate' }}</a>
+            <a class="btn btn-pink float-right" ><i class="fas fa-edit fa-xl   "></i> Edit</a>
+
+          </div>
+
         </div>
+        <div class="card-body body-info w-75">
+          <h5 class="card-title">{{user?.firstName || 'user.firstName'}}</h5>
+          <div class="form-group">
+            <label for="">Prenom:</label>
+            <p class="form-text text-prk">
+              {{user?.lastName || 'user.prenom'}}
+            </p>
+          </div>
+          <div class="form-group">
+            <label for="">Contact:</label>
+            <p class="form-text text-prk">
+              {{user?.phone || 'user.Contact'}}
+            </p>
+          </div>
+        </div>
+
       </div>
 
     </div>
 
+
+
+
+
+
+
   </div>
-
-
-
-
-
-
-
 </div>
+
+
 <div class="row">
 <!-- new user -->
 <app-new-user (closeNewPerson)="closeAddPerson()" *ngIf="newperson" class="col-md-6 "></app-new-user>
 </div>
 <a class="float-right float" (click)="addperson()" [hidden]="hided" role="button" id="plus">
-  <i class="fa fa-plus-circle fs-1 text-prk"></i>
+  <i class="fa fa-plus-circle fs-0 text-prk"></i>
 </a>

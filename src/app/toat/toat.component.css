@@ -1,4 +1,5 @@
 .position{
 position: fixed;
 left:25vw;
+z-index: 99;
 }

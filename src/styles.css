@@ -65,3 +65,10 @@ button.bg-secondary-cus:focus {
 .dropdown.no-arrow .dropdown-toggle::after {
   display: none;
 }
+.fs-0 {
+  font-size: 5.5rem!important;
+}
+.form-check-input:checked,.form-radio-input:checked {
+  background-color: #8b18a0 !important;
+  border-color: #a59da4 !important;
+}

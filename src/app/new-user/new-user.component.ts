@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { human } from './../../models/human';
+import { role } from './../../models/role';
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
@@ -11,20 +12,27 @@ export class NewUserComponent implements OnInit {
   toastvariant='warning';
   toastmessage='';
   toastdelay=5000;
+  roles:any=[];
   @Output() closeNewPerson=new EventEmitter<any>();
   constructor() {
     this.person=new human();
+    for (let index = 0; index < 6; index++) {
+      let element:role = new role();
+      element.name='RL-'+index;
+      if(element.name=='RL-2') element.checked=true
+      this.roles.push(element)
+    }
   }
 
   ngOnInit(): void {
   }
-  onSubmit():Promise<any>{
+  onSubmit():boolean{
+    console.log(this.roles);
+
     this.toastmessage=JSON.stringify(this.person);
     this.toastvariant='success';
     this.toastshow=true;
-    return new Promise<any>((resolve, reject) => {
-      resolve(false)
-    });
+    return true;
   }
   saveNew(){
     this.onSubmit()
