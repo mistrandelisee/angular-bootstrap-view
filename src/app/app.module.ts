@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
@@ -11,7 +12,8 @@ import { AdministrationComponent } from './administration/administration.compone
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
 import { NewUserComponent } from './new-user/new-user.component';
-import {FormsModule } from '@angular/forms'
+import {FormsModule } from '@angular/forms';
+import { NewActivityComponent } from './new-activity/new-activity.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,10 +25,13 @@ import {FormsModule } from '@angular/forms'
     AdministrationComponent,
     ProfileComponent,
     UsersComponent,
-    NewUserComponent
+    NewUserComponent,
+    NewActivityComponent
   ],
   imports: [
-    BrowserModule, NgbModule,FormsModule
+    BrowserModule,
+    HttpClientModule,
+    NgbModule,FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

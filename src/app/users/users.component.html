@@ -1,31 +1,31 @@
 <div class="container" *ngIf="!newperson">
   <div class="row g-2 mb-3">
     <div class="col-md">
-      <label class="form-check-label">
+      <!-- <label class="form-check-label">
         <input type="radio" class="form-check-input"  name="choix" id="choix"
         [(ngModel)]="search.choix" [value]="search.choix" >
         choix0
-      </label>
+      </label> -->
 
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-submit active">choix1
-          <input type="radio" class="form-radio-input" name="choix" id="" autocomplete="off" >
+      <div class="btn-group float-right" data-toggle="buttons">
+        <label class="btn btn-submit active">All
+          <input type="radio" (change)="doSearch()" class="form-radio-input"  value="0" [(ngModel)]="search.choix" name="choix" id="" autocomplete="off" >
         </label>
-        <label class="btn btn-submit">choix2
-          <input type="radio" name="choix" id="" autocomplete="off">
+        <label class="btn btn-submit">Active
+          <input type="radio" (change)="doSearch()" name="choix" id="" value="1"  [(ngModel)]="search.choix" autocomplete="off">
         </label>
-        <label class="btn btn-submit">choix3
-          <input type="radio" name="choix" id=" " autocomplete="off ">
+        <label class="btn btn-submit">Disabled
+          <input type="radio" (change)="doSearch()" name="choix" id=" "  value="2" [(ngModel)]="search.choix" autocomplete="off ">
         </label>
       </div>
-      <i class="fa fa-filter float-right" aria-hidden="true"></i>
+      <i class="fa fa-filter text-prk float-left fs-2" aria-hidden="true"></i>
     </div>
     <div class="col-md" >
 
       <form  #form="ngForm" (ngSubmit)="doSearch()" class="float-right w-75 d-none d-sm-inline-block form-inline navbar-search">
         <div class="input-group form-floating">
           <input id="search-bar" type="text" class="search-bar form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"
-          [(ngModel)]="search.input" name="sc" #searchinpu="ngModel"
+          [(ngModel)]="search.input" name="search" #searchinpu="ngModel"
           >
 
           <label for="search-bar text text-muted">Search for name</label>
@@ -66,6 +66,13 @@
             <p class="form-text text-prk">
               {{user?.phone || 'user.Contact'}}
             </p>
+          </div>
+          <div class="form-group" *ngIf="user.hasRoles">
+            <label for="">Fuctions:</label>
+            <span class="badge badge-primary btn-pink mx-1" *ngFor="let role of user.roles">
+              {{role?.name || 'role'}}
+            </span>
+
           </div>
         </div>
 
