@@ -67,7 +67,7 @@
               {{user?.phone || 'user.Contact'}}
             </p>
           </div>
-          <div class="form-group" *ngIf="user.hasRoles">
+          <div class="form-group" *ngIf="user.roles !=null">
             <label for="">Fuctions:</label>
             <span class="badge badge-primary btn-pink mx-1" *ngFor="let role of user.roles">
               {{role?.name || 'role'}}
