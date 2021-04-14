@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {  NgbDropdown, NgbModal, ModalDismissReasons,NgbActiveModal,NgbNavChangeEvent} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,7 +17,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
   open(content:any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

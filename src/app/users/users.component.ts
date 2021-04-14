@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { human } from 'src/models/human';
 import { AdherantService } from '../adherant.service';
 
@@ -15,6 +15,7 @@ export class UsersComponent implements OnInit {
   users:any=[];
   search:any;
   allUsers:any=[];
+  @Input() allRoles:any=[];
   constructor(private adherantservice:AdherantService) {
     this.search={input:'',choix:'0'};
     this.isloading=true;

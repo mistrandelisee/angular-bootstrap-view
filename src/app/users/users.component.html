@@ -92,7 +92,7 @@
 
 <div class="row">
 <!-- new user -->
-<app-new-user (closeNewPerson)="closeAddPerson()" *ngIf="newperson" class="col-md-6 "></app-new-user>
+<app-new-user [roles]="allRoles" (closeNewPerson)="closeAddPerson()" *ngIf="newperson" class="col-md-6 "></app-new-user>
 </div>
 <a class="float-right float" (click)="addperson()" [hidden]="hided" role="button" id="plus">
   <i class="fa fa-plus-circle fs-0 text-prk"></i>
