@@ -13,12 +13,12 @@ export class AdherantService {
               .set('Authorization', 'my-auth-token')
               .set('Content-Type', 'application/json')
   };
-  // private apiUrl = `http://127.0.0.1:3000`;//https://learn-node-postgres.herokuapp.com/
-  private apiUrl = `https://learn-node-postgres.herokuapp.com`;//https://learn-node-postgres.herokuapp.com/
+  private apiUrl = `http://127.0.0.1:3000`;//https://learn-node-postgres.herokuapp.com/
+  // private apiUrl = `https://learn-node-postgres.herokuapp.com`;//https://learn-node-postgres.herokuapp.com/
 
   constructor(private http: HttpClient) { }
   newAdherant(AdherantData : any) {//ok
-    return this.http.post<human>( this.apiUrl+'/persone/newobj', JSON.stringify(AdherantData), this.httpOptions).pipe(
+    return this.http.post<human>( this.apiUrl+'/adherant/new', JSON.stringify(AdherantData), this.httpOptions).pipe(
       tap(_ =>console.log('add a member processing...')),
       //catchError(this.handleError<any>('add Member Err', []))
     );

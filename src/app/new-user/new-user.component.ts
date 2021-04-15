@@ -1,3 +1,4 @@
+import { AdherantService } from './../adherant.service';
 import { Component, EventEmitter, OnInit, Output,Input } from '@angular/core';
 import { human } from './../../models/human';
 import { role } from './../../models/role';
@@ -13,29 +14,37 @@ export class NewUserComponent implements OnInit {
   toastmessage='';
   toastdelay=5000;
   @Output() closeNewPerson=new EventEmitter<any>();
-  @Input() roles:any=[];
-  constructor() {
+  @Input() roles:role[];
+  constructor(private adhservice :AdherantService) {
+    this.roles=[];
     this.person=new human();
+    console.log('roles comstruct');
     console.log(this.roles);
-    this.roles=this.roles.map(
-      function(r:role){
-        if(r.name==='Admin'){
-          r.checked=true
-        }
-        else r.checked=false
-        return r;
-      }
-    )
-    console.log(this.roles);
-
-  }
+    }
 
   ngOnInit(): void {
+    console.log('roles on init');
+    // console.log(this.roles);
+    this.roles=this.roles.map(element => {
+      return new role(element);
+    });
+    console.log(this.roles);
   }
   onSubmit():boolean{
     console.log(this.roles);
-
+    this.person.roles=this.roles;
     this.toastmessage=JSON.stringify(this.person);
+    let data=this.person.getNewFormData();
+    this.adhservice.newAdherant(data).subscribe(
+      data=>{
+        console.log(data);
+
+      },
+      error=>{
+        console.error(error);
+
+      }
+    )
     this.toastvariant='success';
     this.toastshow=true;
     return true;

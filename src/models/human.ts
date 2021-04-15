@@ -23,5 +23,18 @@ import { role } from "./role";
     setPK(){
       return `AD- ${new Date().getMilliseconds()}`;
     }
+    getNewFormData(){
+      let rolechecked:number[]=[]
+      this.roles.forEach(role => {
+        if(role.checked) rolechecked.push(role.id)
+      });
+      let {id,roles,fullName,...user}=this;
+      let formData={
+        user,role:rolechecked
+      }
+      console.log(JSON.stringify(formData));
+      return formData;
+
+    }
   }
 

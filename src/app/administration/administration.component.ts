@@ -20,6 +20,7 @@ export class AdministrationComponent implements OnInit {
     this.isLoading=true;
     this.roleService.getAllRoles().subscribe(
       data=>{
+
         this.roles=data;
         console.log(data);
 
