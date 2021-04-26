@@ -12,6 +12,8 @@ export class UsersComponent implements OnInit {
   hided:boolean=false;
   isloading:boolean=false;
   getError:boolean=false;
+  viewUser:boolean=false;
+  selectedUser:human=new human();
   users:any=[];
   search:any;
   allUsers:any=[];
@@ -21,6 +23,7 @@ export class UsersComponent implements OnInit {
     this.isloading=true;
     this.getAllPerson();
     this.isloading=false;
+    this.viewUser=false;
    }
   getAllPerson(){
     this.adherantservice.getAllAdherants().subscribe(
@@ -43,8 +46,14 @@ export class UsersComponent implements OnInit {
     this.hided=true;
 
   }
-  ngOnInit(): void {
+  selectUser(id:number){
+    this.viewUser=true;
+    // alert(id)
+    this.selectedUser=this.allUsers.find( (e :human) => e.id==id)
+  }
 
+  ngOnInit(): void {
+    this.viewUser=false;
   }
   closeAddPerson(){
     this.newperson=false;

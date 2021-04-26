@@ -1,3 +1,4 @@
+<div  *ngIf="!viewUser">
 <div class="container" *ngIf="!newperson">
   <div class="row g-2 mb-3">
     <div class="col-md">
@@ -54,7 +55,10 @@
 
         </div>
         <div class="card-body body-info w-75">
-          <h5 class="card-title">{{user?.firstName || 'user.firstName'}}</h5>
+
+            <h5 class="card-title"><a class="text-dark pointer" (click)="selectUser(user?.id)" >{{user?.firstName || 'user.firstName'}}</a></h5>
+
+
           <div class="form-group">
             <label for="">Prenom:</label>
             <p class="form-text text-prk">
@@ -97,3 +101,7 @@
 <a class="float-right float" (click)="addperson()" [hidden]="hided" role="button" id="plus">
   <i class="fa fa-plus-circle fs-0 text-prk"></i>
 </a>
+</div>
+<div class="row" *ngIf="viewUser">
+  <app-user-details [user]="selectedUser" [userId]="selectedUser.id"></app-user-details>
+</div>

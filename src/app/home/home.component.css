@@ -1,3 +1,9 @@
 #dropdownAdmin{
   /* height: 100%; */
 }
+.dropdw{
+  z-index: 1000;
+}
+.sticky-top{
+  z-index: 999!important;
+}

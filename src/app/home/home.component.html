@@ -30,7 +30,7 @@
 
       </ul>
     </div>
-    <ul class="navbar-nav">
+    <ul class="navbar-nav dropdw">
       <li class="nav-item  no-arrow pr-5" ngbDropdown placement="bottom-left">
         <a class="nav-link"   role="button" id="dropdownBasic1" ngbDropdownToggle>
           <span class="mr-2 d-none d-lg-inline text-gray-600 small">username</span>
@@ -54,7 +54,7 @@
   </div>
 </nav>
 <!-- nav link -->
-<ul class="nav nav-pills nav-fill nav-cus p-0 ">
+<ul class="nav nav-pills nav-fill nav-cus p-0 sticky-top">
   <li class="nav-item" (click)="nav.select(1)">
     <a class="nav-link " [class]="active==1?'active':''" aria-current="page" href="#"  >
       <i class="fa fa-home fs-3 d-lg-none d-sm-block d-md-block" aria-hidden="true"></i>

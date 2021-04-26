@@ -13,7 +13,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import {FormsModule } from '@angular/forms';
-import { NewActivityComponent } from './new-activity/new-activity.component'
+import { NewActivityComponent } from './new-activity/new-activity.component';
+import { UserDetailsComponent } from './user-details/user-details.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { NewActivityComponent } from './new-activity/new-activity.component'
     ProfileComponent,
     UsersComponent,
     NewUserComponent,
-    NewActivityComponent
+    NewActivityComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,
