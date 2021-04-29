@@ -1,3 +1,4 @@
+import { AdherantService } from './../adherant.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { human } from 'src/models/human';
 
@@ -8,14 +9,32 @@ import { human } from 'src/models/human';
 })
 export class UserDetailsComponent implements OnInit {
   @Input() userId:number=-1;
-  @Input() user:human=new human();
+  user:human=new human();
   isloading:boolean=true;
+  getError:boolean=true;
   public isCollapsed = false;
   public isCollapsed2 = true;
   public active = 1;
-  constructor() { }
+  constructor(private AdherantService:AdherantService) {
+    alert(this.userId)
+
+  }
 
   ngOnInit(): void {
+    alert(this.userId)
+    this.getPerson();
+  }
+  getPerson(){
+    this.AdherantService.getAdherant(this.userId).subscribe(
+      data =>{
+        this.user=data;
+        console.log(data);
+        console.log(this.user);
+      },
+      error=>{
+        this.getError=true;
+      }
+    )
   }
 
 }

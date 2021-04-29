@@ -24,15 +24,23 @@ export class AdherantService {
     );
   }
   getAllAdherants():Observable<human> {
-    return this.http.get<human>( this.apiUrl+'/persone/').pipe(
+    return this.http.get<human>( this.apiUrl+'/adherant/').pipe(
       tap(_ =>console.log('fetched humans')),
       retry(3)
       // , // retry a failed request up to 3 times
       // catchError(this.handleError<any>('getpersonnes', []))
       );
   }
+  getAdherant(id:number):Observable<any> {
+    return this.http.get<any>( this.apiUrl+'/adherant/'+id).pipe(
+      tap(_ =>console.log('fetched human with id '+id)),
+      retry(3)
+      // , // retry a failed request up to 3 times
+      // catchError(this.handleError<any>('getpersonnes', []))
+      );
+  }
   updatePerson(userNewData : any) {//ok
-    return this.http.post<human>( this.apiUrl+'/persone/update', JSON.stringify(userNewData), this.httpOptions).pipe(
+    return this.http.post<human>( this.apiUrl+'/adherant/update', JSON.stringify(userNewData), this.httpOptions).pipe(
       tap(_ =>console.log('update a member processing...')),
       //catchError(this.handleError<any>('update menber Err', []))
       );

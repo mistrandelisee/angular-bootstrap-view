@@ -13,7 +13,7 @@ export class UsersComponent implements OnInit {
   isloading:boolean=false;
   getError:boolean=false;
   viewUser:boolean=false;
-  selectedUser:human=new human();
+  selectedUserId:number=0;
   users:any=[];
   search:any;
   allUsers:any=[];
@@ -48,8 +48,8 @@ export class UsersComponent implements OnInit {
   }
   selectUser(id:number){
     this.viewUser=true;
-    // alert(id)
-    this.selectedUser=this.allUsers.find( (e :human) => e.id==id)
+    alert(id)
+    this.selectedUserId=id;
   }
 
   ngOnInit(): void {
