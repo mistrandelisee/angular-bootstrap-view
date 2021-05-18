@@ -12,6 +12,10 @@ export class UsersComponent implements OnInit {
   hided:boolean=false;
   isloading:boolean=false;
   getError:boolean=false;
+  toastshow:boolean=false;
+  toastvariant='warning';
+  toastmessage='';
+  toastdelay=5000;
   viewUser:boolean=false;
   selectedUserId:number=0;
   users:any=[];
@@ -22,7 +26,7 @@ export class UsersComponent implements OnInit {
     this.search={input:'',choix:'0'};
     this.isloading=true;
     this.getAllPerson();
-    this.isloading=false;
+
     this.viewUser=false;
    }
   getAllPerson(){
@@ -30,11 +34,13 @@ export class UsersComponent implements OnInit {
       data =>{
 
 
+
         this.users=data;
         this.allUsers=data;
         this.getError=false;
         console.log(data);
         console.log(this.users);
+        this.isloading=false;
       },
       error=>{
         this.getError=true;
@@ -58,11 +64,37 @@ export class UsersComponent implements OnInit {
   closeAddPerson(){
     this.newperson=false;
     this.hided=false;
+    this.isloading=true;
+    this.getAllPerson();//refresh
+  }
+  /**
+   * modify
+   */
+   modify(username:String,active:boolean) {
+    this.toastshow=false;
+    let userbody={
+      user:{
+        username,
+        active
+      }
+    }
+    console.log(userbody);
+    this.isloading=true;
+    this.adherantservice.updatePerson(userbody).subscribe(
+      data=>{console.log(data);
+        this.isloading =false
+        this.toastshow=true;
+        this.toastvariant='success';
+        this.toastmessage='updated has been done successfully';
+      },
+      error=>{console.error(error);
+      }
+    )
   }
   doSearch(){
     console.log(this.search)
     var srch:string=this.search.input;
-
+    this.isloading=true;
     var haschoice=this.search.choix=='0'?false:true;
     var choix=this.search.choix=='1'?true:false;
     this.users =this.allUsers.filter( (e :human) => {
@@ -80,6 +112,7 @@ export class UsersComponent implements OnInit {
         else return null
       }
     )
+    this.isloading=false;
   }
    makeData() {
     this.search={input:'',choix:'0'};

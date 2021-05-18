@@ -125,7 +125,7 @@
     <div class="row g-2 mt-1 " >
 
       <div class="col-md ">
-        <button type="submit" (click)="saveNew()" class="w-30 btn btn-submit  primary  float-right"  [disabled]="!newPerson.form.valid">
+        <button type="submit" (click)="saveNew(); newPerson.reset()" class="w-30 btn btn-submit  primary  float-right"  [disabled]="!newPerson.form.valid">
           Save &amp; New
         </button>
       </div>
@@ -141,3 +141,4 @@
 
 
 </form>
+<app-spinner *ngIf="isloading"></app-spinner>

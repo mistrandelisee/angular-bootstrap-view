@@ -14,7 +14,8 @@ import { UsersComponent } from './users/users.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import {FormsModule } from '@angular/forms';
 import { NewActivityComponent } from './new-activity/new-activity.component';
-import { UserDetailsComponent } from './user-details/user-details.component'
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { SpinnerComponent } from './spinner/spinner.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { UserDetailsComponent } from './user-details/user-details.component'
     UsersComponent,
     NewUserComponent,
     NewActivityComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

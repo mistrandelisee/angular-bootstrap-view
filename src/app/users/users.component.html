@@ -48,7 +48,7 @@
         <img class="img-profile p-3 card-img-top user-img rounded-circle" src="../../assets/img/user1-128x128.jpg"  height="50">
         <div class=" row  action-button end-10">
           <div class="col-12">
-            <a class="btn btn-primary mx-1 float-right" >{{user?.active ? 'Dismiss' : 'Activate' }}</a>
+            <a class="btn btn-primary mx-1 float-right" data-id={user.username} (click)="modify(user.username, !user.active);user.active=! user?.active">{{user?.active ? 'Dismiss' : 'Activate' }}</a>
             <a class="btn btn-pink float-right" ><i class="fas fa-edit fa-xl   "></i> Edit</a>
 
           </div>
@@ -104,4 +104,9 @@
 </div>
 <div class="row" *ngIf="viewUser">
   <app-user-details [userId]="selectedUserId"></app-user-details>
+</div>
+<app-spinner *ngIf="isloading"></app-spinner>
+<div class="container">
+  <app-toat *ngIf="toastshow" [msg]="toastmessage" [show]="toastshow" [variant]="toastvariant"></app-toat>
+
 </div>

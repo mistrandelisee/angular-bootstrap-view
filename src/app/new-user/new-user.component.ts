@@ -10,6 +10,7 @@ import { role } from './../../models/role';
 export class NewUserComponent implements OnInit {
   person:human;
   toastshow:boolean=false;
+  isloading:boolean=false;
   toastvariant='warning';
   toastmessage='';
   toastdelay=5000;
@@ -31,22 +32,25 @@ export class NewUserComponent implements OnInit {
     console.log(this.roles);
   }
   onSubmit():boolean{
+    this.isloading=true;
     console.log(this.roles);
     this.person.roles=this.roles;
-    this.toastmessage=JSON.stringify(this.person);
+    // this.toastmessage=JSON.stringify(this.person);
+    this.toastmessage='Save successfully';
     let data=this.person.getNewFormData();
     this.adhservice.newAdherant(data).subscribe(
       data=>{
         console.log(data);
-
+        this.isloading=false;
+        this.toastvariant='success';
+        this.toastshow=true;
       },
       error=>{
         console.error(error);
 
       }
     )
-    this.toastvariant='success';
-    this.toastshow=true;
+
     return true;
   }
   saveNew(){
