@@ -54,7 +54,7 @@ export class UsersComponent implements OnInit {
   }
   selectUser(id:number){
     this.viewUser=true;
-    alert(id)
+    // alert(id)
     this.selectedUserId=id;
   }
 
