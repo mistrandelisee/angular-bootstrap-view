@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { role } from '../models/role';
+import { config } from '../models/config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map, retry, tap } from 'rxjs/operators';
@@ -12,8 +13,8 @@ export class FunctionService {
               .set('Authorization', 'my-auth-token')
               .set('Content-Type', 'application/json')
   };
-  // private apiUrl = `http://127.0.0.1:3000`;//https://learn-node-postgres.herokuapp.com/
-  private apiUrl = `https://learn-node-postgres.herokuapp.com`;//https://learn-node-postgres.herokuapp.com/
+   private apiUrl = new config().getURL();
+  // private apiUrl = `https://learn-node-postgres.herokuapp.com`;//https://learn-node-postgres.herokuapp.com/
 
   constructor(private http: HttpClient) { }
   newRole(roleData : any) {//ok

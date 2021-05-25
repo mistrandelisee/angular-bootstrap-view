@@ -71,7 +71,6 @@ export class NewUserComponent implements OnInit {
 
         if(b){this.closeNewPerson.emit(true)}
 
-
   }
 
 }

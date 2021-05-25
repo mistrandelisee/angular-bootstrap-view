@@ -1,134 +1,135 @@
 <div class="row g-2">
-<div class="col-md-3">
-  <div class="card" [class]="user?.active ?'active-border':''">
-    <img class="img-profile p-3 card-img-top user-img rounded-circle" src="../../assets/img/user1-128x128.jpg"  height="50">
-    <div class=" row  action-button end-10">
-      <div class="col-12">
-        <a class="btn btn-primary mx-1 float-right" >{{user?.active ? 'Dismiss' : 'Activate' }}</a>
-        <a class="btn btn-pink float-right" ><i class="fas fa-edit fa-xl   "></i> Edit</a>
+  <div class="col-md-3">
+    <div class="card" [class]="user?.active ?'active-border':''">
+      <img class="img-profile p-3 card-img-top user-img rounded-circle" src="../../assets/img/user1-128x128.jpg"  height="50">
+      <div class=" row  action-button end-10">
+        <div class="col-12">
+          <a class="btn btn-primary mx-1 float-right" >{{user?.active ? 'Dismiss' : 'Activate' }}</a>
+          <a class="btn btn-pink float-right" ><i class="fas fa-edit fa-xl   "></i> Edit</a>
 
+        </div>
+
+      </div>
+      <div class="card-body body-info w-75">
+
+          <h5 class="card-title">{{user?.firstName || 'user.firstName'}}</h5>
+
+
+        <div class="form-group">
+          <label for="">Prenom:</label>
+          <p class="form-text text-prk">
+            {{user?.lastName || 'user.prenom'}}
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="">Contact:</label>
+          <p class="form-text text-prk">
+            {{user?.phone || 'user.Contact'}}
+          </p>
+        </div>
+        <div class="form-group" *ngIf="user.roles !=null">
+          <label for="">Fuctions:</label>
+          <span class="badge badge-primary btn-pink mx-1" *ngFor="let role of user.roles">
+            {{role?.name || 'role'}}
+          </span>
+
+        </div>
       </div>
 
     </div>
-    <div class="card-body body-info w-75">
-
-        <h5 class="card-title">{{user?.firstName || 'user.firstName'}}</h5>
-
-
-      <div class="form-group">
-        <label for="">Prenom:</label>
-        <p class="form-text text-prk">
-          {{user?.lastName || 'user.prenom'}}
-        </p>
-      </div>
-      <div class="form-group">
-        <label for="">Contact:</label>
-        <p class="form-text text-prk">
-          {{user?.phone || 'user.Contact'}}
-        </p>
-      </div>
-      <div class="form-group" *ngIf="user.roles !=null">
-        <label for="">Fuctions:</label>
-        <span class="badge badge-primary btn-pink mx-1" *ngFor="let role of user.roles">
-          {{role?.name || 'role'}}
-        </span>
-
-      </div>
-    </div>
-
   </div>
-</div>
-<div class="col-md-8">
-  <div class="card" >
-    <div class="card-header " [ngClass]="{'active-border': active==1}" role="group" aria-controls="collapseExample" (click)="collapse1.toggle() ;active=1;isCollapsed2=true" [attr.aria-expanded]="!isCollapsed">
-      Activities
+  <div class="col-md-8">
+    <div class="card" >
+      <div class="card-header " [ngClass]="{'active-border': active==1}" role="group" aria-controls="collapseExample" (click)="collapse1.toggle() ;active=1;isCollapsed2=true" [attr.aria-expanded]="!isCollapsed">
+        Activities
+      </div>
+      <div class="card-body"  #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+        <div class="row g-1">
+          <div class="col-sm-6 " *ngFor="let act of activities">
+            <app-view-activity [Activity]="act"></app-view-activity>
+            <!-- <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{act.name}}</h5>
+                <div class="form-group row">
+                  <label for="bp" class="col-sm-3 col-form-label">Base price</label>
+                  <div class="col-sm-9">
+                    <span class="card-text font-weight-bold form-control-plaintext" id="bp">{{act?.basePrice}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="p" class="col-sm-3 col-form-label">contribution price</label>
+                  <div class="col-sm-9">
+                    <span class="card-text font-weight-bold form-control-plaintext" id="p">{{act.price}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="s" class="col-sm-3 col-form-label">status</label>
+                  <div class="col-sm-9">
+                    <span [class]="act?.Status=='Pending' ?'text-warning':act?.Status=='Approved' ?'text-success':'text-danger'" class="card-text font-weight-bold form-control-plaintext" id="s">{{act.Status}}</span>
+
+                    <!-- <span class="card-text font-weight-bold form-control-plaintext text-success" id="s">approved</span>
+
+                    <span class="card-text font-weight-bold form-control-plaintext text-danger" id="s">rejected</span> -->
+                  <!-- </div>
+                </div>
+                <div *ngIf="! act?.approved">
+                  <a href="#" class="btn btn-success" >Activate  </a>
+                  <a href="#" class="btn btn-danger float float-right" > Reject</a>
+
+                </div>
+
+
+
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="card-body"  #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-      <div class="row g-1">
-        <div class="col-sm-6 " *ngFor="let act of activities">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{act.name}}</h5>
-              <div class="form-group row">
-                <label for="bp" class="col-sm-3 col-form-label">Base price</label>
-                <div class="col-sm-9">
-                  <span class="card-text font-weight-bold form-control-plaintext" id="bp">{{act?.basePrice}}</span>
+    <div class="card" >
+      <div class="card-header" [ngClass]="{'active-border': active==2}" role="group" aria-controls="collapseExample2" (click)="collapse2.toggle() ;active=2;isCollapsed=true" [attr.aria-expanded]="!isCollapsed2">
+        Amendments
+      </div>
+      <div class="card-body"  #collapse2="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
+        <div class="row g-1">
+          <div class="col-sm-6 " *ngFor="let item of [1,2,3,4]">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Activity Name</h5>
+                <div class="form-group row">
+                  <label for="bp" class="col-sm-3 col-form-label">Base price</label>
+                  <div class="col-sm-9">
+                    <span class="card-text font-weight-bold form-control-plaintext" id="bp">basePrice</span>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label for="p" class="col-sm-3 col-form-label">contribution price</label>
-                <div class="col-sm-9">
-                  <span class="card-text font-weight-bold form-control-plaintext" id="p">{{act.price}}</span>
+                <div class="form-group row">
+                  <label for="p" class="col-sm-3 col-form-label">contribution price</label>
+                  <div class="col-sm-9">
+                    <span class="card-text font-weight-bold form-control-plaintext" id="p">Price</span>
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group row">
-                <label for="s" class="col-sm-3 col-form-label">status</label>
-                <div class="col-sm-9">
-                  <span [class]="act?.Status=='Pending' ?'text-warning':act?.Status=='Approved' ?'text-success':'text-danger'" class="card-text font-weight-bold form-control-plaintext" id="s">{{act.Status}}</span>
+                <div class="form-group row">
+                  <label for="s" class="col-sm-3 col-form-label">status</label>
+                  <div class="col-sm-9">
+                    <span class="card-text font-weight-bold form-control-plaintext text-warning" id="s">Waitting</span>
 
-                  <!-- <span class="card-text font-weight-bold form-control-plaintext text-success" id="s">approved</span>
+                    <span class="card-text font-weight-bold form-control-plaintext text-success" id="s">approved</span>
 
-                  <span class="card-text font-weight-bold form-control-plaintext text-danger" id="s">rejected</span> -->
+                    <span class="card-text font-weight-bold form-control-plaintext text-danger" id="s">rejected</span>
+                  </div>
                 </div>
-              </div>
-              <div *ngIf="! act?.approved">
-                <a href="#" class="btn btn-success" >Activate  </a>
-                <a href="#" class="btn btn-danger float float-right" > Reject</a>
+                <a href="#" class="btn btn-primary">Activate || reject</a>
+
 
               </div>
-
-
-
             </div>
           </div>
         </div>
       </div>
     </div>
+
+
   </div>
-  <div class="card" >
-    <div class="card-header" [ngClass]="{'active-border': active==2}" role="group" aria-controls="collapseExample2" (click)="collapse2.toggle() ;active=2;isCollapsed=true" [attr.aria-expanded]="!isCollapsed2">
-      Amendments
-    </div>
-    <div class="card-body"  #collapse2="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
-      <div class="row g-1">
-        <div class="col-sm-6 " *ngFor="let item of [1,2,3,4]">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Activity Name</h5>
-              <div class="form-group row">
-                <label for="bp" class="col-sm-3 col-form-label">Base price</label>
-                <div class="col-sm-9">
-                  <span class="card-text font-weight-bold form-control-plaintext" id="bp">basePrice</span>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="p" class="col-sm-3 col-form-label">contribution price</label>
-                <div class="col-sm-9">
-                  <span class="card-text font-weight-bold form-control-plaintext" id="p">Price</span>
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="s" class="col-sm-3 col-form-label">status</label>
-                <div class="col-sm-9">
-                  <span class="card-text font-weight-bold form-control-plaintext text-warning" id="s">Waitting</span>
-
-                  <span class="card-text font-weight-bold form-control-plaintext text-success" id="s">approved</span>
-
-                  <span class="card-text font-weight-bold form-control-plaintext text-danger" id="s">rejected</span>
-                </div>
-              </div>
-              <a href="#" class="btn btn-primary">Activate || reject</a>
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
-
-
-</div>
-</div>

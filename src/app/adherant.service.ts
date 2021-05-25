@@ -3,6 +3,7 @@ import { human } from '../models/human';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map, retry, tap } from 'rxjs/operators';
+import { config } from '../models/config';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,7 @@ export class AdherantService {
               .set('Authorization', 'my-auth-token')
               .set('Content-Type', 'application/json')
   };
-  // private apiUrl = `http://127.0.0.1:3000`;//https://learn-node-postgres.herokuapp.com/
-  private apiUrl = `https://learn-node-postgres.herokuapp.com`;//https://learn-node-postgres.herokuapp.com/
-
+  private apiUrl = new config().getURL();
   constructor(private http: HttpClient) { }
   newAdherant(AdherantData : any) {//ok
     return this.http.post<human>( this.apiUrl+'/adherant/new', JSON.stringify(AdherantData), this.httpOptions).pipe(
@@ -35,6 +34,14 @@ export class AdherantService {
     return this.http.get<any>( this.apiUrl+'/adherant/'+id).pipe(
       tap(_ =>console.log('fetched human with id '+id)),
       retry(3)
+      // , // retry a failed request up to 3 times
+      // catchError(this.handleError<any>('getpersonnes', []))
+      );
+  }
+  ComfirmParticipation(id:number,aid:number,data:any):Observable<any> {
+    return this.http.post<any>( this.apiUrl+'/adherant/'+id+'/participate-update/'+aid, JSON.stringify(data), this.httpOptions).pipe(
+      tap(_ =>console.log('update participate id '+id))
+      // retry(3)
       // , // retry a failed request up to 3 times
       // catchError(this.handleError<any>('getpersonnes', []))
       );

@@ -44,7 +44,7 @@
 
     <!-- user list -->
     <div class="col-md-3" *ngFor="let user of users">
-      <div class="card" [class]="user?.active ?'active-border':''" (click)="selectUser(user?.id)">
+      <!-- <div class="card" [class]="user?.active ?'active-border':''" (click)="selectUser(user?.id)">
         <img class="img-profile p-3 card-img-top user-img rounded-circle" src="../../assets/img/user1-128x128.jpg"  height="50">
         <div class=" row  action-button end-10">
           <div class="col-12">
@@ -80,7 +80,9 @@
           </div>
         </div>
 
-      </div>
+      </div> -->
+
+        <app-view-user  [user]="user" (onSelectUser)="selectUser($event)" ></app-view-user>
 
     </div>
 
@@ -106,7 +108,4 @@
   <app-user-details [userId]="selectedUserId"></app-user-details>
 </div>
 <app-spinner *ngIf="isloading"></app-spinner>
-<div class="container">
-  <app-toat *ngIf="toastshow" [msg]="toastmessage" [show]="toastshow" [variant]="toastvariant"></app-toat>
 
-</div>

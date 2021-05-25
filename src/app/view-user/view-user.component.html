@@ -1,0 +1,43 @@
+<div class="card" [class]="user?.active ?'active-border':''" >
+  <img (click)="selectUser(user.id)" class="img-profile p-3 card-img-top user-img rounded-circle" src="../../assets/img/user1-128x128.jpg"  height="50">
+  <div class=" row  action-button end-10">
+    <div class="col-12">
+      <a class="btn btn-primary mx-1 float-right" data-id={user.username} (click)="modify(user.username, !user.active);user.active=! user?.active">{{user?.active ? 'Dismiss' : 'Activate' }}</a>
+      <a class="btn btn-pink float-right" ><i class="fas fa-edit fa-xl   "></i> Edit</a>
+
+    </div>
+
+  </div>
+  <div class="card-body body-info w-75">
+
+      <h5 class="card-title"><a class="text-dark pointer" (click)="selectUser(user.id)" >{{user?.firstName || 'user.firstName'}}</a></h5>
+
+
+    <div class="form-group">
+      <label for="">Prenom:</label>
+      <p class="form-text text-prk">
+        {{user?.lastName || 'user.prenom'}}
+      </p>
+    </div>
+    <div class="form-group">
+      <label for="">Contact:</label>
+      <p class="form-text text-prk">
+        {{user?.phone || 'user.Contact'}}
+      </p>
+    </div>
+    <div class="form-group" *ngIf="user.roles !=null">
+      <label for="">Fuctions:</label>
+      <span class="badge badge-primary btn-pink mx-1" *ngFor="let role of user.roles">
+        {{role?.name || 'role'}}
+
+      </span>
+
+    </div>
+  </div>
+
+</div>
+<app-spinner *ngIf="isloading"></app-spinner>
+<div class="container">
+  <app-toat *ngIf="toastshow" [msg]="toastmessage" [show]="toastshow" [variant]="toastvariant"></app-toat>
+
+</div>

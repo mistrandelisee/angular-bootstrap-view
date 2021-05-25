@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { human } from 'src/models/human';
 import { AdherantService } from '../adherant.service';
-
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -70,27 +69,7 @@ export class UsersComponent implements OnInit {
   /**
    * modify
    */
-   modify(username:String,active:boolean) {
-    this.toastshow=false;
-    let userbody={
-      user:{
-        username,
-        active
-      }
-    }
-    console.log(userbody);
-    this.isloading=true;
-    this.adherantservice.updatePerson(userbody).subscribe(
-      data=>{console.log(data);
-        this.isloading =false
-        this.toastshow=true;
-        this.toastvariant='success';
-        this.toastmessage='updated has been done successfully';
-      },
-      error=>{console.error(error);
-      }
-    )
-  }
+
   doSearch(){
     console.log(this.search)
     var srch:string=this.search.input;
