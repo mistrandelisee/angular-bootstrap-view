@@ -1,0 +1,110 @@
+hr{
+  border: 1px pink solid;
+}
+:root {
+  --prk:#aca7e9;
+}
+
+form.user .custom-checkbox.small label {
+  line-height: 1.5rem;
+}
+
+form.user .form-control-user {
+  font-size: 0.8rem;
+  border: 1px solid transparent;
+  border-bottom-color: rgb(172, 167, 233);
+  /* border-radius: 5rem; */
+  padding: 1.5rem 1rem;
+}
+
+
+.form-control::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+
+.form-control:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #6e707e;
+}
+
+.form-control:focus {
+  color: #6e707e;
+  background-color: #fff;
+  border-bottom-color: #490e30;
+
+  outline: 0;
+  box-shadow:  0 0.2rem rgba(171, 190, 224, 0.664);
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #858796;
+  opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+  color: #858796;
+  opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #858796;
+  opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #858796;
+  opacity: 1;
+}
+
+.form-control::placeholder {
+  color: #858796;
+  opacity: 1;
+}
+
+.form-control:disabled, .form-control[readonly] {
+  background-color: #eaecf4;
+  opacity: 1;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-block + .btn-block {
+  margin-top: 0.5rem;
+}
+
+
+.btn-login:not(:disabled) {
+  color: black;
+  font-size: 1rem;
+  border-radius: 10rem;
+  padding: 0.75rem 1rem;
+  border: 1px black solid !important;
+  height:50px;
+
+  background: linear-gradient(to right,rgba(171, 190, 224, 0.664) 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all .5s ease-out;
+
+}
+
+.btn-login:hover:not(:disabled) {
+  color: #fff;
+  background-position: left bottom;
+}
+
+
+
+.btn-pink.disabled, .btn-pink:disabled {
+  color: #fff;
+  background-color: #eed0e1;
+  border-color: #912d7b;
+}
+
+
+
+
+

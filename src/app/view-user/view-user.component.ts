@@ -18,6 +18,8 @@ export class ViewUserComponent implements OnInit {
   constructor(private adherantservice:AdherantService) { }
 
   ngOnInit(): void {
+    this.user.withRoles=human.hasRoles(this.user);
+    this.user.isAdmin=human.isAdmin(this.user);
   }
   selectUser(id:number){
     this.onSelectUser.emit(id)

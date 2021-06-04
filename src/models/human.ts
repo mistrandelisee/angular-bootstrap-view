@@ -14,11 +14,24 @@ import { role } from "./role";
     city: string='';
     gender: string='';
     active: boolean=false;
+    isAdmin: boolean=false;
+    withRoles: boolean=false;
     roles:role[]=[];
-    hasRoles(){
-      console.log(this);
+    static hasRoles(obj:any):boolean{
+      console.log('hsarole');
 
-      return this.roles && this.roles.length>0;
+      return obj.roles && obj.roles.length>0;
+    }
+    static isAdmin(obj:any):boolean{
+      console.log('hsarole');
+      let adminrole= obj.roles.find(function (role:any) {
+        if (role.name.includes('Admin')) {
+          return role
+        }
+      }
+
+      )
+      return adminrole?true:false;
     }
     setPK(){
       return `AD- ${new Date().getMilliseconds()}`;

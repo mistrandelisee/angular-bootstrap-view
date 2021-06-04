@@ -1,3 +1,10 @@
-<app-home></app-home>
+<!-- <app-home></app-home> -->
 <!-- <app-accordion></app-accordion>
 <app-toat></app-toat> -->
+<div *ngIf="! submitted;" >
+  <app-login [errorServer]="errMsg" (submit)="onSubmitHandler($event)"></app-login>
+</div>
+<div *ngIf="submitted;">
+  <app-home (logout)="onlogoutHandler($event)" [user]="user"></app-home>
+  <!-- <app-home [data]="userData" (logout)="onlogoutHandler($event)"></app-home> -->
+</div>

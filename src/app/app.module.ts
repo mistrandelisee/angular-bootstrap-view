@@ -17,7 +17,8 @@ import { NewActivityComponent } from './new-activity/new-activity.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { ViewUserComponent } from './view-user/view-user.component';
-import { ViewActivityComponent } from './view-activity/view-activity.component'
+import { ViewActivityComponent } from './view-activity/view-activity.component';
+import { LoginComponent } from './login/login.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { ViewActivityComponent } from './view-activity/view-activity.component'
     UserDetailsComponent,
     SpinnerComponent,
     ViewUserComponent,
-    ViewActivityComponent
+    ViewActivityComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

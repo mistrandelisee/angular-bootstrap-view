@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { human } from '../models/human';
+import { responseauth } from '../models/responseauth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map, retry, tap } from 'rxjs/operators';
@@ -52,6 +53,15 @@ export class AdherantService {
       //catchError(this.handleError<any>('update menber Err', []))
       );
   }
+  authentification(userloginData : any) {//ok
+    return this.http.post<any>( this.apiUrl+'/authentification', JSON.stringify(userloginData), this.httpOptions).pipe(
+      tap(_ =>console.log('authentification a member processing...')),
+      //catchError(this.handleError<any>('update menber Err', []))
+      );
+  }
+
+
+
 
 
 

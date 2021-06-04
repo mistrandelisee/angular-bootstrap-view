@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {  NgbDropdown, NgbModal, ModalDismissReasons,NgbActiveModal,NgbNavChangeEvent} from '@ng-bootstrap/ng-bootstrap';
+import { human } from 'src/models/human';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +14,26 @@ export class HomeComponent implements OnInit {
   closeResult = '';
   active:number=3;//activated nav
   disabled = true;
-  constructor(private modalService: NgbModal,public modal: NgbActiveModal) { }
+  person:human;
+  constructor(private modalService: NgbModal,public modal: NgbActiveModal) {
+    this.person=new human();
+    this.user=new human();
+    console.log(this.user);
 
+   }
+  @Output() logout =new EventEmitter<any>();
+  @Input() user:human;
+  @Input() errorserver:any;
   ngOnInit(): void {
+    console.log('on Init');
+    console.log(this.user);
+    this.person=<human>this.user;
+    console.log(human.hasRoles(this.user));
+    this.user.withRoles=human.hasRoles(this.user);
+    this.user.isAdmin=human.isAdmin(this.user);
+    console.log(this.user);
+
+
   }
   open(content:any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -25,11 +43,13 @@ export class HomeComponent implements OnInit {
     });
   }
   dologout(){
-    alert('bye');
+    // alert('bye');
+    this.logout.emit(this.user);
     this.modalService.dismissAll('close');
 
     this.modal.close('Ok click')
   }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

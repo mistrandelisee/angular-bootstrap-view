@@ -43,6 +43,7 @@ import { human } from "./human";
   }
 
     static getActivity(obj:any):activity{
+      //casting
       let act=<activity>obj;
       act.price=obj.human_participate_activity.price;
       act.Status=obj.human_participate_activity.Status;
