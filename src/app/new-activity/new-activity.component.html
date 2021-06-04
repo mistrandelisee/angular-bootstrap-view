@@ -1,0 +1,93 @@
+
+<div class="container">
+  <app-toat *ngIf="toastshow" [msg]="toastmessage" [show]="toastshow" [variant]="toastvariant"></app-toat>
+
+</div>
+
+<form  #newActivity="ngForm" class="p-3">
+<h4 class="text-center">New Task</h4>
+  <div class="row g-2">
+    <div class="col-md">
+      <div class="form-floating">
+        <input type="text" id="name" name="name"  required
+        [(ngModel)]="task.name"  #name="ngModel" class="form-control"
+        [class]="(!name.valid && name.dirty) ? 'is-invalid': ''"
+        >
+        <label for="name">Title</label>
+      </div>
+    </div>
+  </div>
+  <div class="row g-2 mt-1">
+    <div class="col-md">
+      <div class="form-floating">
+        <select class="form-select" id="floatingSelectGrid" name="Type" aria-label="Floating label select example"
+        [class]="(!Type.valid && Type.dirty) ? 'is-invalid': ''"
+        [(ngModel)]="task.Type" name="Type" #Type="ngModel"
+        required>
+          <option value="" selected>Select Option</option>
+          <option value="1">Cotisation</option>
+          <option value="2">Support</option>
+          <option value="3">Metting</option>
+        </select>
+        <label for="floatingSelectGrid">Type</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-2 mt-1">
+    <div class="col-md">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="description" name="description" placeholder="john"
+        [class]="(!description.valid && description.dirty) ? 'is-invalid': ''"
+        [(ngModel)]="task.description"   #description="ngModel" class="form-control"
+
+        required>
+        <label for="description">Description</label>
+      </div>
+    </div>
+  </div>
+  <div class="row g-2 mt-1">
+    <div class="col-md">
+      <div class="form-floating">
+        <input type="number" class="form-control" id="price" name="price" placeholder="0" value=""
+        [class]="(!price.valid && price.dirty) ? 'is-invalid': ''"
+        [(ngModel)]="task.basePrice" name="price" #price="ngModel" min="500" step=250
+        [required]="task.required"
+        >
+        <label for="price">price</label>
+
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input"  name="requiered" id="requiered"
+          [(ngModel)]="task.required" [value]="task.required">
+           required ?
+        </label>
+        <p *ngIf="task.required" class="form-text text-muted">
+         All members must participate
+        </p>
+      </div>
+    </div>
+  </div>
+ <div class="row g-2 mt-1 " >
+
+      <div class="col-md ">
+        <button type="submit" (click)="saveNew(); newActivity.reset()" class="w-30 btn btn-submit  primary  float-right"  [disabled]="!newActivity.form.valid">
+          Save &amp; New
+        </button>
+      </div>
+      <div class="col-md ">
+        <button type="submit"  (click)="saveClose()" class="w-30 btn btn-submit   float-right"  [disabled]="!newActivity.form.valid">
+          Save &amp; Close
+        </button>
+      </div>
+    </div>
+
+
+
+
+
+</form>
+<app-spinner *ngIf="isloading"></app-spinner>

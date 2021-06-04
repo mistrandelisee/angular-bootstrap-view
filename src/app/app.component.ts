@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { human } from 'src/models/human';
 import { AdherantService } from './adherant.service';
+import { VariablesGlobales } from './VariablesGlobales';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +14,9 @@ export class AppComponent {
   errMsg:any;
   userData:any;
   user:human=new human();
-  constructor(private AdherantService:AdherantService) {
+  constructor(private AdherantService:AdherantService,private variablesGlobales:VariablesGlobales) {
+    console.log(this.variablesGlobales);
+    this.variablesGlobales.parametre='help';
     this.errMsg={}
     if (document.cookie.replace(/(?:(?:^|.*;\s*)learningApp-User\s*\=\s*([^;]*).*$)|^.*$/, "$1")) {
 
@@ -27,7 +30,7 @@ export class AppComponent {
             this.user=data.OK;
             console.log(this.user);
             console.log(human.hasRoles(this.user));
-
+            this.variablesGlobales.connectedUser=this.user;
             this.submitted=true;
           }
           else{
@@ -54,7 +57,7 @@ export class AppComponent {
         data=>{
           if (data.OK) {
             this.user=data.OK;
-
+            this.variablesGlobales.connectedUser=this.user;
             this.submitted=true;
             if(login.alive)
             this.doOnce(data.token)

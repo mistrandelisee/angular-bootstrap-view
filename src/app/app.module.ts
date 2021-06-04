@@ -19,6 +19,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { ViewUserComponent } from './view-user/view-user.component';
 import { ViewActivityComponent } from './view-activity/view-activity.component';
 import { LoginComponent } from './login/login.component'
+import { VariablesGlobales } from './VariablesGlobales';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,7 @@ import { LoginComponent } from './login/login.component'
     HttpClientModule,
     NgbModule,FormsModule
   ],
-  providers: [],
+  providers: [VariablesGlobales],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

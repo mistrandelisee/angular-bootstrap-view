@@ -13,9 +13,10 @@ import { human } from "./human";
     ActId:number=0;
     name: string='';
     description: string='';
+    Type: string='';
     owner: human= new human();
     closed: boolean=false;
-    requiered: boolean=false;
+    required: boolean=false;
     ModifDate:any;//approved or rejected date
    approved: boolean=false;
     test: boolean=(this.Status==''?true:false);
