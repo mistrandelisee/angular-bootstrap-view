@@ -20,6 +20,7 @@ import { ViewUserComponent } from './view-user/view-user.component';
 import { ViewActivityComponent } from './view-activity/view-activity.component';
 import { LoginComponent } from './login/login.component'
 import { VariablesGlobales } from './VariablesGlobales';
+import { ActivitiesComponent } from './activities/activities.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { VariablesGlobales } from './VariablesGlobales';
     SpinnerComponent,
     ViewUserComponent,
     ViewActivityComponent,
-    LoginComponent
+    LoginComponent,
+    ActivitiesComponent
   ],
   imports: [
     BrowserModule,

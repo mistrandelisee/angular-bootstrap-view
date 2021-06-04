@@ -47,6 +47,14 @@ export class AdherantService {
       // catchError(this.handleError<any>('getpersonnes', []))
       );
   }
+  SendParticipation(id:number,aid:number,data:any):Observable<any> {
+    return this.http.post<any>( this.apiUrl+'/adherant/'+id+'/participate/'+aid, JSON.stringify(data), this.httpOptions).pipe(
+      tap(_ =>console.log('update participate id '+id))
+      // retry(3)
+      // , // retry a failed request up to 3 times
+      // catchError(this.handleError<any>('getpersonnes', []))
+      );
+  }
   updatePerson(userNewData : any) {//ok
     return this.http.post<human>( this.apiUrl+'/adherant/update', JSON.stringify(userNewData), this.httpOptions).pipe(
       tap(_ =>console.log('update a member processing...')),

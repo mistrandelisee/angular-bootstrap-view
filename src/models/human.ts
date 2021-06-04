@@ -18,14 +18,14 @@ import { role } from "./role";
     withRoles: boolean=false;
     roles:role[]=[];
     static hasRoles(obj:any):boolean{
-      console.log('hsarole');
+      // console.log('hsarole');
 
       return obj.roles && obj.roles.length>0;
     }
     static isAdmin(obj:any):boolean{
-      console.log('hsarole');
+      // console.log('hsarole');
       let adminrole= obj.roles.find(function (role:any) {
-        if (role.name.includes('Admin')) {
+        if (role.name.toLowerCase().includes('admin')) {
           return role
         }
       }

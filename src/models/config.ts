@@ -8,6 +8,7 @@ export class config {
    */
   public getURL() :string{
     return this.url_dev;
+    // return this.url_prod;
 
   }
 

@@ -14,11 +14,13 @@ import { human } from "./human";
     name: string='';
     description: string='';
     Type: string='';
+    userNote: string='';
     owner: human= new human();
     closed: boolean=false;
     required: boolean=false;
     ModifDate:any;//approved or rejected date
-   approved: boolean=false;
+    createdAt:any;//approved or rejected date
+    approved: boolean=false;
     test: boolean=(this.Status==''?true:false);
     note: string='The is in this '+this.Status;
     constructor(id:number){
@@ -48,7 +50,8 @@ import { human } from "./human";
       let act=<activity>obj;
       act.price=obj.human_participate_activity.price;
       act.Status=obj.human_participate_activity.Status;
-      act.description=obj.human_participate_activity.description;
+      act.userNote=obj.human_participate_activity.userNote;
+      // act.description= act.userNote || obj.human_participate_activity.description;
       act.note=(obj.human_participate_activity.note|| act.description)|| act.note;
       act.ModifDate=obj.human_participate_activity.ApprovedDate|| obj.human_participate_activity.rejectectedDate;
       act.UserId=obj.human_participate_activity.humanId;

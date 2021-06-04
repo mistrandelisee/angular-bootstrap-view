@@ -72,3 +72,6 @@ button.bg-secondary-cus:focus {
   background-color: #8b18a0 !important;
   border-color: #a59da4 !important;
 }
+.italic{
+  font-style: italic;
+}

@@ -31,6 +31,8 @@ export class UserDetailsComponent implements OnInit {
     this.AdherantService.getAdherant(this.userId).subscribe(
       data =>{
         this.user=data.adherant;
+        this.user.withRoles=human.hasRoles(this.user);
+        this.user.isAdmin=human.isAdmin(this.user);
         console.log(data);
         console.log(this.user);
         for (let index = 0; index < data.adherant.activities.length; index++) {

@@ -40,7 +40,7 @@
   </div>
   <div class="col-md-8">
     <div class="card" >
-      <div class="card-header " [ngClass]="{'active-border': active==1}" role="group" aria-controls="collapseExample" (click)="collapse1.toggle() ;active=1;isCollapsed2=true" [attr.aria-expanded]="!isCollapsed">
+      <div class="card-header cursor" [ngClass]="{'active-border': active==1}" role="group" aria-controls="collapseExample" (click)="collapse1.toggle() ;active=1;isCollapsed2=true" [attr.aria-expanded]="!isCollapsed">
         Activities
       </div>
       <div class="card-body"  #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed">

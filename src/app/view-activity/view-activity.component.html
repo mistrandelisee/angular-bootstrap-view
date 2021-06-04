@@ -7,78 +7,117 @@
     <div class="form-group row">
       <label for="bp" class="col-sm-3 col-form-label">Base price</label>
       <div class="col-sm-9">
-        <span class="card-text font-weight-bold form-control-plaintext" id="bp">{{Activity?.basePrice}}</span>
+        <span class="card-text font-weight-bold form-control-plaintext" id="bp">{{Activity?.basePrice | currency : 'XAF':'symbol'}}</span>
       </div>
     </div>
+
+
+    <div *ngIf=" (mode=='ADMIN')">
+      <div class="form-group row">
+        <label for="p" class="col-sm-3 col-form-label">contribution price</label>
+        <div class="col-sm-9">
+          <span class="card-text font-weight-bold form-control-plaintext" id="p">{{Activity.price | currency : 'XAF' :'symbol'}}</span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="s" class="col-sm-3 col-form-label">status</label>
+        <div class="col-sm-9">
+          <span [class]="Activity?.Status=='Pending' ?'text-warning':Activity?.Status=='Approved' ?'text-success':'text-danger'" class="card-text font-weight-bold form-control-plaintext" id="s">{{Activity.Status}}</span>
+
+          <!-- <span class="card-text font-weight-bold form-control-plaintext text-success" id="s">approved</span>
+
+          <span class="card-text font-weight-bold form-control-plaintext text-danger" id="s">rejected</span> -->
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="p" class="col-sm-4 col-form-label">description</label>
+        <div class="col-sm-8">
+          <span class="card-text font-weight-bold form-control-plaintext" id="p">{{Activity.userNote || Activity.description}}</span>
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="! (Activity?.Status=='Pending')">
+        <label for="p" class="col-sm-3 col-form-label">note</label>
+        <div class="col-sm-9">
+          <span class="card-text font-weight-bold form-control-plaintext" id="p">{{Activity.note}}</span>
+        </div>
+      </div>
+
+  </div>
+  <div class="form-group row" *ngIf="(Activity.owner!=null)">
+    <label for="p" class="col-sm-4 col-form-label">Opened By</label>
+    <div class="col-sm-8">
+      <span class="card-text text-prk font-weight-bold form-control-plaintext" id="p">{{Activity.owner?.fullName | uppercase}}</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="p" class="col-sm-4 col-form-label">Opened On</label>
+    <div class="col-sm-8">
+      <span class="card-text text-prk font-weight-bold form-control-plaintext italic" id="p">{{Activity.createdAt | date  }}</span>
+    </div>
+  </div>
+  <div *ngIf="(mode!='ADMIN')">
     <div class="form-group row">
-      <label for="p" class="col-sm-3 col-form-label">contribution price</label>
-      <div class="col-sm-9">
-        <span class="card-text font-weight-bold form-control-plaintext" id="p">{{Activity.price}}</span>
+      <!-- <label for="p" class="col-sm-4 col-form-label">description</label> -->
+      <div class="col-sm">
+        <span class=" card-text text-muted font-weight-bold form-control-plaintext italic" id="p">{{Activity.description}}</span>
       </div>
     </div>
-
-    <div class="form-group row">
-      <label for="s" class="col-sm-3 col-form-label">status</label>
-      <div class="col-sm-9">
-        <span [class]="Activity?.Status=='Pending' ?'text-warning':Activity?.Status=='Approved' ?'text-success':'text-danger'" class="card-text font-weight-bold form-control-plaintext" id="s">{{Activity.Status}}</span>
-
-        <!-- <span class="card-text font-weight-bold form-control-plaintext text-success" id="s">approved</span>
-
-        <span class="card-text font-weight-bold form-control-plaintext text-danger" id="s">rejected</span> -->
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="p" class="col-sm-4 col-form-label">description</label>
-      <div class="col-sm-8">
-        <span class="card-text font-weight-bold form-control-plaintext" id="p">{{Activity.description}}</span>
-      </div>
-    </div>
-    <div class="form-group row" *ngIf="! (Activity?.Status=='Pending')">
-      <label for="p" class="col-sm-3 col-form-label">note</label>
-      <div class="col-sm-9">
-        <span class="card-text font-weight-bold form-control-plaintext" id="p">{{Activity.note}}</span>
-      </div>
-    </div>
-    <div *ngIf=" (Activity?.Status=='Pending')">
-      <a href="#" class="btn btn-success" (click)="open(content,0)">Activate  </a>
-      <a href="#" class="btn btn-danger float float-right" (click)="open(content,1)"> Reject</a>
-
-    </div>
-
+    <a href="#" class="btn btn-info btn-pink" (click)="open(content,3)">Participate  </a>
+  </div>
+  <div *ngIf=" (Activity?.Status=='Pending') && (mode=='ADMIN')">
+    <a href="#" class="btn btn-success" (click)="open(content,0)">Activate  </a>
+    <a href="#" class="btn btn-danger float float-right" (click)="open(content,1)"> Reject</a>
+  </div>
 
 
   </div>
 </div>
-<!-- logout modal -->
+<!-- activation/rejection modal -->
 <ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-title">confim action</h4>
-    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="row g-2 mt-1">
-      <div class="col-md">
-        <div class="form-floating">
-          <input type="text" class="form-control" id="note" name="note" placeholder="input a note" value=""
-          [(ngModel)]="description" name="note"
-          >
-          <label for="note">Note</label>
+  <form  #viewActivity="ngForm">
 
-        </div>
-      </div>
-
-
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">confirm action</h4>
+      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-  </div>
+    <div class="modal-body">
+      <div class="row g-2 mt-1">
+        <div class="col-md">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="note" name="note" placeholder="input a note" value=""
+            [(ngModel)]="description" name="note"
+            >
+            <label for="note">Note</label>
 
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-    <button type="button" ngbAutofocus class="btn btn-pink" (click)="modif();description=''">submit</button>
-  </div>
+          </div>
+        </div>
+        <div class="col-md" *ngIf="(mode!='ADMIN')">
+          <div class="form-floating">
+            <input type="number" class="form-control" id="price" name="price" placeholder="0" value=""
+            [class]="(!pricex.valid && pricex.dirty) ? 'is-invalid': ''"
+            [(ngModel)]="price"  #pricex="ngModel" min="Activity.BasePrice" step=250
+            required
+            >
+            <label for="price">price</label>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary"
+      (click)="modal.dismiss('cancel click')"[disabled]="!viewActivity.form.valid">
+        Cancel</button>
+      <button type="button" ngbAutofocus class="btn btn-pink" (click)="modif();description=''">submit</button>
+    </div>
+  </form>
   </ng-template>
-  <!-- logout modal /-->
+  <!-- activation/rejection modal /-->
   <app-spinner *ngIf="isloading"></app-spinner>
 
 <div class="container">

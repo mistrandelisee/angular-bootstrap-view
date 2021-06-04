@@ -29,6 +29,13 @@ export class ActivityService {
       // catchError(this.handleError<any>('getpersonnes', []))
       );
   }
+  getAvailableActivities(userID:number):Observable<activity> {
+    return this.http.get<activity>( this.apiUrl+'/activity/available/'+userID).pipe(
+      tap(_ =>console.log('fetched Activities')),
+      retry(3)// retry a failed request up to 3 times
+      // catchError(this.handleError<any>('getpersonnes', []))
+      );
+  }
   getActivity(id:number):Observable<any> {
     return this.http.get<any>( this.apiUrl+'/activity/'+id).pipe(
       tap(_ =>console.log('fetched activity with id '+id)),
