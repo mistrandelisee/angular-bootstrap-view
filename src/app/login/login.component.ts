@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
   isRegister:boolean;
   constructor() {
     this.login={username:'' ,password : '',alive:false}
-    this.isRegister=true;
+    this.isRegister=false;
   }
   @Input() errorServer:any;
   @Output() submit =new EventEmitter<any>();

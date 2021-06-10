@@ -1,5 +1,5 @@
 import { human } from 'src/models/human';
-import { AdherantService } from './../adherant.service';
+import { RegistrationServiceService } from './../registration-service.service';
 import { Component, OnInit, Output,Input, EventEmitter } from '@angular/core';
 import { role } from 'src/models/role';
 
@@ -15,13 +15,16 @@ export class RegisterComponent implements OnInit {
   toastvariant='warning';
   toastmessage='';
   acceptedFormats:string[];
+  fileList:any[];
   toastdelay=5000;
   @Output() closeNewPerson=new EventEmitter<any>();
   @Input() roles:role[];
-  constructor(private adhservice :AdherantService) {
+  constructor(private adhservice :RegistrationServiceService) {
     this.roles=[];
+    this.fileList=[];
     this.acceptedFormats=[];
     this.acceptedFormats.push('.png');
+    this.acceptedFormats.push('.jpg');
     this.person=new human();
     console.log('roles comstruct');
     console.log(this.roles);
@@ -41,7 +44,8 @@ export class RegisterComponent implements OnInit {
     this.person.roles=this.roles;
     // this.toastmessage=JSON.stringify(this.person);
     this.toastmessage='Save successfully';
-    let data=this.person.getNewFormData();
+
+    let data=this.person.getNewRegistrationData(this.fileList.pop());
     this.adhservice.newAdherant(data).subscribe(
       data=>{
         console.log(data);
@@ -87,14 +91,16 @@ export class RegisterComponent implements OnInit {
         const fileReader = new FileReader();
         // set onload function of FileReader object
         fileReader.onloadend = (() => {
-        var fileContents = fileReader.result;
+        var fileContents= fileReader.result;
         let base64 = 'base64,';
-        let content = fileContents.indexOf(base64) + base64.length;
-        fileContents = fileContents.substring(content);
+        let content = (fileContents) ?fileContents.toString().indexOf(base64) + base64.length :0;
+        fileContents = (fileContents) ?fileContents.toString().substring(content) :'';
 
-        var fileToUpload = {
-            fileName : file.name,
-            base64Data : fileContents
+        var fileToUpload:any = {
+            fullname : file.name,
+            name : file.name,
+            parent:'',
+            Base64Data : fileContents
         }
 
         this.fileList.push(fileToUpload);
@@ -106,5 +112,17 @@ export class RegisterComponent implements OnInit {
 
     fileReader.readAsDataURL(file);
 }
+// loadFiles(fileList:FileList):void{
+
+//    const reader= new FileReader();
+//    reader.addEventListener('load',(event)=>{
+//      const result=event.target.result;
+
+//    });
+//   // reader.readAsText(fileList[0],'UTF-8');
+//   reader.readAsText(fileList[0],'UTF-8');
+
+
+//  }
 
 }

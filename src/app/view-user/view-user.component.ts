@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { human } from 'src/models/human';
 import { AdherantService } from '../adherant.service';
@@ -15,11 +17,35 @@ export class ViewUserComponent implements OnInit {
   toastvariant='warning';
   toastmessage='';
   toastdelay=5000;
-  constructor(private adherantservice:AdherantService) { }
+  imageUrl:string='';
+  imageToShow:any;
+  constructor(private adherantservice:AdherantService,private http: HttpClient) { }
 
   ngOnInit(): void {
     this.user.withRoles=human.hasRoles(this.user);
     this.user.isAdmin=human.isAdmin(this.user);
+    this.imageUrl='https://brave-bear-ciavsw-dev-ed.my.salesforce.com/sfc/p/4L000000iKbv/a/4L000000XnKf/sdpYeaZN0JkKfjTpLRPc.Ia5enevwkeK6xfThAFq8tQ';
+    // this.onURLinserted();
+    let self=this;
+    this.asyncgetImage(this.imageUrl, 'image').
+    then(function(file) {
+
+      // with file reader you will transform the file in a data url file;
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+
+      // just putting the data url to img element
+          if(document.getElementById('image') !=null){
+            self.imageToShow = reader.result;
+            // document.getElementsByTagName('img').src = reader.result ;
+          }
+      }
+    })
+    .catch(error=>{
+      console.log(error);
+
+    })
   }
   selectUser(id:number){
     this.onSelectUser.emit(id)
@@ -45,4 +71,55 @@ export class ViewUserComponent implements OnInit {
       }
     )
   }
+  onURLinserted() {
+      this.getImage(this.imageUrl).subscribe(data => {
+        this.createImageFromBlob(data);
+      }, error => {
+        console.log("Error occured",error);
+      });
+}
+
+getImage(imageUrl: string): Observable<Blob> {
+  return this.http
+        .get(imageUrl, { responseType:'blob'});
+        // .map((res: Response) => res.blob());
+}
+
+createImageFromBlob(image: Blob) {
+   let reader = new FileReader(); //you need file reader for read blob data to base64 image data.
+   reader.addEventListener("load", () => {
+      this.imageToShow = reader.result; // here is the result you got from reader
+   }, false);
+
+   if (image) {
+      reader.readAsDataURL(image);
+   }
+}
+
+async asyncgetImage(url:string, fileName:string) {
+  // on the first then you will return blob from response
+  let headers = new Headers();
+
+  headers.append('Content-Type', 'application/json');
+  headers.append('Accept', 'application/json');
+
+  headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+  // headers.append('Access-Control-Allow-Credentials', 'true');
+
+  headers.append('GET', 'POST');
+
+  // headers.append('Authorization', 'Basic ' + base64.encode(username + ":" + password));
+
+ return await fetch(url, {
+  mode: 'no-cors',
+  // credentials: 'include',
+  method: 'GET',
+  headers: headers
+}
+  ).then(r => r.blob())
+ .then((blob) => { // on the second, you just create a file from that blob, getting the type and name that intend to inform
+
+     return new File([blob], fileName+'.'+   blob.type.split('/')[1]) ;
+ });
+}
 }
