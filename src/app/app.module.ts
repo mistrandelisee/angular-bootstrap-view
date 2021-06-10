@@ -21,6 +21,7 @@ import { ViewActivityComponent } from './view-activity/view-activity.component';
 import { LoginComponent } from './login/login.component'
 import { VariablesGlobales } from './VariablesGlobales';
 import { ActivitiesComponent } from './activities/activities.component';
+import { RegisterComponent } from './register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { ActivitiesComponent } from './activities/activities.component';
     ViewUserComponent,
     ViewActivityComponent,
     LoginComponent,
-    ActivitiesComponent
+    ActivitiesComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,149 @@
+
+<div class="container">
+  <app-toat *ngIf="toastshow" [msg]="toastmessage" [show]="toastshow" [variant]="toastvariant"></app-toat>
+
+</div>
+
+<form  #newPerson="ngForm" class="p-3">
+<h4 class="text-center">New Member</h4>
+  <div class="row g-2">
+    <div class="col-md">
+      <div class="form-floating">
+        <input type="email" id="username" name="username"  required
+        [(ngModel)]="person.username"  #username="ngModel" class="form-control" email="true"
+        [class]="(!username.valid && username.dirty) ? 'is-invalid': ''"
+        >
+        <label for="username">Email address</label>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-floating">
+        <input type="file" data-id="uploadFile" (change)="handleFilesChange($event)" accept={acceptedFormats}>
+        <label for="username">File</label>
+      </div>
+    </div>
+  </div>
+  <div class="row g-2 mt-1">
+    <div class="col-md">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="fname" name="fname" placeholder="john"
+        [class]="(!fname.valid && fname.dirty) ? 'is-invalid': ''"
+        [(ngModel)]="person.firstName"   #fname="ngModel" class="form-control"
+
+        required>
+        <label for="fname">Fisrt Name</label>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="lname" name="lname" placeholder="Atangana"
+        [class]="(!lname.valid && lname.dirty) ? 'is-invalid': ''"
+        [(ngModel)]="person.lastName"   #lname="ngModel" class="form-control"
+        required>
+        <label for="lname">Last Name</label>
+      </div>
+    </div>
+  </div>
+  <div class="row g-2 mt-1">
+    <div class="col-md">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="phone" name="phone" placeholder="6565454545" value=""
+        [(ngModel)]="person.phone" name="phone" #phone="ngModel"
+        >
+        <label for="phone">Contact</label>
+        <!--   -->
+        <p *ngIf="!phone.dirty || phone.pristine" class="form-text text-info pl-1">
+          set the member phone number as his contact
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="city" name="city" placeholder="Yaounde"
+        [(ngModel)]="person.city" name="city" #city="ngModel"
+        >
+        <label for="city">City</label>
+      </div>
+    </div>
+  </div>
+  <div class="row g-2 mt-1">
+    <div class="col-md">
+      <div class="form-floating">
+        <input type="number" class="form-control" id="fees" name="fees" placeholder="0" value=""
+        [(ngModel)]="person.fees" name="fees" #fees="ngModel"
+        >
+        <label for="phone">Registration Fees</label>
+
+      </div>
+    </div>
+
+    <!-- <div class="col-md">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="city" name="city" placeholder="Yaounde"
+        [(ngModel)]="person.city" name="city" #city="ngModel"
+        >
+        <label for="city">City</label>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="row g-2 mt-1">
+     <div class="col-md">
+      <div class="form-floating">
+        <select class="form-select" id="floatingSelectGrid" name="gender" aria-label="Floating label select example"
+        [(ngModel)]="person.gender" name="gender" #gender="ngModel"
+        >
+          <option value="" selected>Select Option</option>
+          <option value="Mr">Male</option>
+          <option value="Mrs">Female</option>
+        </select>
+        <label for="floatingSelectGrid">Gender</label>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input"  name="alive" id="alive"
+          [(ngModel)]="person.active" [value]="person.active">
+           Activate ?
+        </label>
+        <p *ngIf="person.active" class="form-text text-muted">
+          the user won't be completly activated if he doesn't set his password
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row g-2 mt-1 mx-1 role-box" >
+    <p>Select roles:</p>
+    <div class="col-md-3 col-sm-6" *ngFor="let role of roles">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input"  name="{{role.name}}" id="{{role.name}}"
+          [(ngModel)]="role.checked" [value]="role.checked" [disabled]="(role.name=='RL-2')?true:false">
+          {{role.name}}
+        </label>
+      </div>
+    </div>
+
+  </div>
+    <div class="row g-2 mt-1 " >
+
+      <div class="col-md ">
+        <button type="submit" (click)="saveNew(); newPerson.reset()" class="w-30 btn btn-submit  primary  float-right"  [disabled]="!newPerson.form.valid">
+          Save &amp; New
+        </button>
+      </div>
+      <div class="col-md ">
+        <button type="submit"  (click)="saveClose()" class="w-30 btn btn-submit   float-right"  [disabled]="!newPerson.form.valid">
+          Save &amp; Close
+        </button>
+      </div>
+    </div>
+
+
+
+
+
+</form>
+<app-spinner *ngIf="isloading"></app-spinner>
