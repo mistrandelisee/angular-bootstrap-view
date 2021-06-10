@@ -72,7 +72,7 @@ export class UsersComponent implements OnInit {
 
   doSearch(){
     console.log(this.search)
-    var srch:string=this.search.input;
+    var srch:string=this.search.input.toLowerCase();
     this.isloading=true;
     var haschoice=this.search.choix=='0'?false:true;
     var choix=this.search.choix=='1'?true:false;
@@ -80,7 +80,7 @@ export class UsersComponent implements OnInit {
       let  b:boolean=false;
       let fullname=e.fullName||"";
       let phone=e.phone||"";
-        if (fullname.includes(srch) || phone.includes(srch)) {
+        if (fullname.toLowerCase().includes(srch) || phone.toLowerCase().includes(srch)) {
           b=true;
           if (haschoice && e.active!=choix) {
             b=false;
