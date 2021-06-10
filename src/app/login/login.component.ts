@@ -7,9 +7,10 @@ import { Component, OnInit,EventEmitter, Input, Output } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
   login:any;
+  isRegister:boolean;
   constructor() {
     this.login={username:'' ,password : '',alive:false}
-
+    this.isRegister=true;
   }
   @Input() errorServer:any;
   @Output() submit =new EventEmitter<any>();

@@ -18,7 +18,7 @@
     </div>
     <div class="col-md">
       <div class="form-floating">
-        <input type="file" data-id="uploadFile" (change)="handleFilesChange($event)" accept={acceptedFormats}>
+        <input type="file" data-id="uploadFile" (change)="handleFilesChange($event)" [accept]="acceptedFormats">
         <label for="username">File</label>
       </div>
     </div>

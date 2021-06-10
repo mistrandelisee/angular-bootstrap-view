@@ -1,4 +1,4 @@
-<div class="bg-gradient-primary-login">
+<div class="bg-gradient-primary-login" *ngIf="!isRegister">
   <div class="container">
 
     <!-- Outer Row -->
@@ -59,12 +59,12 @@
 
                   </form>
 
-                  <!-- <div class="text-center">
-                    <a href="/home" class="small ">
-                      dashboard
+                   <div class="text-center">
+                    <a (click)="isRegister=true" class="small ">
+                      Register
                     </a>
 
-                  </div> -->
+                  </div>
                 </div>
               </div>
             </div>
@@ -76,4 +76,9 @@
     </div>
 
   </div>
+</div>
+<div *ngIf="isRegister">
+  <app-register>
+
+  </app-register>
 </div>

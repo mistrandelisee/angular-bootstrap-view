@@ -14,11 +14,14 @@ export class RegisterComponent implements OnInit {
   isloading:boolean=false;
   toastvariant='warning';
   toastmessage='';
+  acceptedFormats:string[];
   toastdelay=5000;
   @Output() closeNewPerson=new EventEmitter<any>();
   @Input() roles:role[];
   constructor(private adhservice :AdherantService) {
     this.roles=[];
+    this.acceptedFormats=[];
+    this.acceptedFormats.push('.png');
     this.person=new human();
     console.log('roles comstruct');
     console.log(this.roles);
@@ -73,5 +76,35 @@ export class RegisterComponent implements OnInit {
         if(b){this.closeNewPerson.emit(true)}
 
   }
+  handleFilesChange(event:any) {
+    if (event.target.files.length > 0) {
+        this.uploadHelper(event.target.files[0]);
+    }
+  }
+
+    uploadHelper(file:any) {
+        // create a FileReader object
+        const fileReader = new FileReader();
+        // set onload function of FileReader object
+        fileReader.onloadend = (() => {
+        var fileContents = fileReader.result;
+        let base64 = 'base64,';
+        let content = fileContents.indexOf(base64) + base64.length;
+        fileContents = fileContents.substring(content);
+
+        var fileToUpload = {
+            fileName : file.name,
+            base64Data : fileContents
+        }
+
+        this.fileList.push(fileToUpload);
+
+        /*console.log('file name : ' + this.fileList[0].fileName);
+        console.log('base64Data : ' + this.fileList[0].base64Data);*/
+
+    });
+
+    fileReader.readAsDataURL(file);
+}
 
 }
