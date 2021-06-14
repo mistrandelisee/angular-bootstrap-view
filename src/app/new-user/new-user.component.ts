@@ -1,3 +1,4 @@
+import { LabelsServiceService } from './../labels-service.service';
 import { AdherantService } from './../adherant.service';
 import { Component, EventEmitter, OnInit, Output,Input } from '@angular/core';
 import { human } from './../../models/human';
@@ -16,7 +17,7 @@ export class NewUserComponent implements OnInit {
   toastdelay=5000;
   @Output() closeNewPerson=new EventEmitter<any>();
   @Input() roles:role[];
-  constructor(private adhservice :AdherantService) {
+  constructor(private adhservice :AdherantService,public label:LabelsServiceService) {
     this.roles=[];
     this.person=new human();
     console.log('roles comstruct');

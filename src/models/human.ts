@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { company } from './company';
 'use strict'
 
 import { role } from "./role";
@@ -33,6 +34,9 @@ import { role } from "./role";
       )
       return adminrole?true:false;
     }
+
+
+
     setPK(){
       return `AD- ${new Date().getMilliseconds()}`;
     }
@@ -49,8 +53,7 @@ import { role } from "./role";
       return formData;
 
     }
-    getNewRegistrationData(customfile:any){
-
+    getNewRegistrationData(customfile:any,account:company){
       let {id,roles,fullName,active,isAdmin,withRoles,...user}=this;
       let formData={
         request:{
@@ -63,11 +66,15 @@ import { role } from "./role";
           gender:user.gender,
           roles:'Administrator',
           file:customfile,
-          companyName:'FROM Angular Web Test',
+          ...account.getRegistrationData()
+        }
+
+      }
+      /*
+      companyName:'FROM Angular Web Test',
           companyMoto:'Angular-Web',
           companyDescription:'FROM Angular Web test'
-        }
-      }
+      */
       // formData.request['file']=customfile;
       console.log(JSON.stringify(formData));
       return {user:formData};

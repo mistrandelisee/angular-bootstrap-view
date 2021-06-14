@@ -5,7 +5,7 @@
   <div class="card-body">
     <h5 class="card-title">{{Activity.name}}</h5>
     <div class="form-group row">
-      <label for="bp" class="col-sm-3 col-form-label">Base price</label>
+      <label for="bp" class="col-sm-3 col-form-label">{{label.base_price}}</label>
       <div class="col-sm-9">
         <span class="card-text font-weight-bold form-control-plaintext" id="bp">{{Activity?.basePrice | currency : 'XAF':'symbol'}}</span>
       </div>
@@ -14,13 +14,13 @@
 
     <div *ngIf=" (mode=='ADMIN')">
       <div class="form-group row">
-        <label for="p" class="col-sm-3 col-form-label">contribution price</label>
+        <label for="p" class="col-sm-3 col-form-label">{{label.contrib_price}}</label>
         <div class="col-sm-9">
           <span class="card-text font-weight-bold form-control-plaintext" id="p">{{Activity.price | currency : 'XAF' :'symbol'}}</span>
         </div>
       </div>
       <div class="form-group row">
-        <label for="s" class="col-sm-3 col-form-label">status</label>
+        <label for="s" class="col-sm-3 col-form-label">{{label.status}}</label>
         <div class="col-sm-9">
           <span [class]="Activity?.Status=='Pending' ?'text-warning':Activity?.Status=='Approved' ?'text-success':'text-danger'" class="card-text font-weight-bold form-control-plaintext" id="s">{{Activity.Status}}</span>
 
@@ -30,13 +30,13 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="p" class="col-sm-4 col-form-label">description</label>
+        <label for="p" class="col-sm-4 col-form-label">{{label.description}}</label>
         <div class="col-sm-8">
           <span class="card-text font-weight-bold form-control-plaintext" id="p">{{Activity.userNote || Activity.description}}</span>
         </div>
       </div>
       <div class="form-group row" *ngIf="! (Activity?.Status=='Pending')">
-        <label for="p" class="col-sm-3 col-form-label">note</label>
+        <label for="p" class="col-sm-3 col-form-label">{{label.note}}</label>
         <div class="col-sm-9">
           <span class="card-text font-weight-bold form-control-plaintext" id="p">{{Activity.note}}</span>
         </div>
@@ -44,7 +44,7 @@
 
   </div>
   <div class="form-group row" *ngIf="(Activity.owner!=null)">
-    <label for="p" class="col-sm-4 col-form-label">Opened By</label>
+    <label for="p" class="col-sm-4 col-form-label">{{label.opened_by_task}}</label>
     <div class="col-sm-8">
       <span class="card-text text-prk font-weight-bold form-control-plaintext" id="p">{{Activity.owner?.fullName | uppercase}}</span>
     </div>

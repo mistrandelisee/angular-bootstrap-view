@@ -1,9 +1,12 @@
+import { element } from 'protractor';
+import { LabelsServiceService } from './../labels-service.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { activity } from './../../models/activity';
 
 import {  NgbDropdown, NgbModal, ModalDismissReasons,NgbActiveModal,NgbNavChangeEvent} from '@ng-bootstrap/ng-bootstrap';
 import { AdherantService } from '../adherant.service';
 import { VariablesGlobales } from '../VariablesGlobales';
+import { human } from 'src/models/human';
 
 @Component({
   selector: 'app-view-activity',
@@ -23,7 +26,10 @@ export class ViewActivityComponent implements OnInit {
   toastvariant='warning';
   @Input() mode:string='ADMIN';
   toastmessage='';
-  constructor(private variablesGlobales:VariablesGlobales,private modalService: NgbModal,public modal: NgbActiveModal,private adherantservice:AdherantService) {
+  constructor(private variablesGlobales:VariablesGlobales,
+    private modalService: NgbModal,public modal: NgbActiveModal,
+    private adherantservice:AdherantService,
+    public label:LabelsServiceService) {
     this.Activity=new activity(0);
     // this.price=0;
   }
@@ -32,6 +38,28 @@ export class ViewActivityComponent implements OnInit {
     console.log('activity');
 
     this.price=this.Activity.basePrice;
+    let h=new human();
+    let act:any=this.Activity;
+    let owner:any={};
+    for (const key in h) {
+      let keyx='owner.'+key;
+      // console.log('key ',key);
+      // console.log('keyx ',keyx);
+
+      if (Object.prototype.hasOwnProperty.call(act, keyx)) {
+        const element = act[keyx];
+        // console.log('key =>',key,' keyx =>',keyx,' value ',element);
+        owner[key]=element;
+
+      }
+    }
+    console.log('owner');
+    console.log(owner);
+    owner['fullName']=owner['lastName'] +' '+owner['firstName']
+
+    this.Activity.owner=<human>owner;
+    console.log(this.Activity);
+
   }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

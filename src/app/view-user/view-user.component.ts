@@ -3,12 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { human } from 'src/models/human';
 import { AdherantService } from '../adherant.service';
+import { ImageServiceService } from '../image-service.service';
+import { config } from 'src/models/config';
 @Component({
   selector: 'app-view-user',
   templateUrl: './view-user.component.html',
   styleUrls: ['./view-user.component.css']
 })
 export class ViewUserComponent implements OnInit {
+  private apiUrl = new config().getURL();
   @Input() user:human=new human();
   @Output() onSelectUser=new EventEmitter<number>();
   isloading:boolean=false;
@@ -19,7 +22,7 @@ export class ViewUserComponent implements OnInit {
   toastdelay=5000;
   imageUrl:string='';
   imageToShow:any;
-  constructor(private adherantservice:AdherantService,private http: HttpClient) { }
+  constructor(private adherantservice:AdherantService,private imageservice:ImageServiceService,private http: HttpClient) { }
 
   ngOnInit(): void {
     this.user.withRoles=human.hasRoles(this.user);
@@ -27,7 +30,7 @@ export class ViewUserComponent implements OnInit {
     this.imageUrl='https://brave-bear-ciavsw-dev-ed.my.salesforce.com/sfc/p/4L000000iKbv/a/4L000000XnKf/sdpYeaZN0JkKfjTpLRPc.Ia5enevwkeK6xfThAFq8tQ';
     // this.onURLinserted();
     let self=this;
-    this.asyncgetImage(this.imageUrl, 'image').
+    this.asyncgetImage('https://cors-anywhere.herokuapp.com/'+this.imageUrl, 'image').
     then(function(file) {
 
       // with file reader you will transform the file in a data url file;
@@ -72,7 +75,7 @@ export class ViewUserComponent implements OnInit {
     )
   }
   onURLinserted() {
-      this.getImage(this.imageUrl).subscribe(data => {
+      this.imageservice.getImage().subscribe(data => {
         this.createImageFromBlob(data);
       }, error => {
         console.log("Error occured",error);
@@ -103,20 +106,14 @@ async asyncgetImage(url:string, fileName:string) {
   headers.append('Content-Type', 'application/json');
   headers.append('Accept', 'application/json');
 
-  headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+  headers.append('Access-Control-Allow-Origin', '*');
   // headers.append('Access-Control-Allow-Credentials', 'true');
 
   headers.append('GET', 'POST');
 
   // headers.append('Authorization', 'Basic ' + base64.encode(username + ":" + password));
 
- return await fetch(url, {
-  mode: 'no-cors',
-  // credentials: 'include',
-  method: 'GET',
-  headers: headers
-}
-  ).then(r => r.blob())
+ return await fetch(url).then(r => r.blob())
  .then((blob) => { // on the second, you just create a file from that blob, getting the type and name that intend to inform
 
      return new File([blob], fileName+'.'+   blob.type.split('/')[1]) ;

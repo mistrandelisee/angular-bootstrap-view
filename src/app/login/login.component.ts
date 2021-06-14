@@ -1,3 +1,4 @@
+import { LabelsServiceService } from './../labels-service.service';
 import { Component, OnInit,EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
@@ -8,7 +9,7 @@ import { Component, OnInit,EventEmitter, Input, Output } from '@angular/core';
 export class LoginComponent implements OnInit {
   login:any;
   isRegister:boolean;
-  constructor() {
+  constructor(public label:LabelsServiceService) {
     this.login={username:'' ,password : '',alive:false}
     this.isRegister=false;
   }
@@ -16,6 +17,9 @@ export class LoginComponent implements OnInit {
   @Output() submit =new EventEmitter<any>();
   submitted = false;
   ngOnInit(): void {
+  }
+  onBack(){
+    this.isRegister=false;
   }
   onSubmit() {
     this.submitted = true;

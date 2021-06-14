@@ -1,0 +1,30 @@
+
+.btn-submit:not(:disabled) {
+  color: black;
+  border-radius: 5px;
+  padding: 0.75rem 1rem;
+  border: 1px rgb(233, 193, 231) solid !important;
+  background-color: #9d7fb3 ;
+}
+.primary {
+  background-color: #cbadf3 !important;
+}
+.form-check-input:disabled {
+  /* color: rgb(27, 4, 4); */
+}
+.btn-submit:hover:not(:disabled) {
+  color: #fff;
+  background-position: left bottom;
+}
+.btn-submit:disabled {
+  color: #fff;
+  background-color: #07020a !important;
+}
+.w-30 {
+  width: 30% !important;
+}
+.role-box{
+  border-color: #9f65ca;
+  border-width: 2px;
+  box-shadow: -1px 4px 9px 0px;
+}

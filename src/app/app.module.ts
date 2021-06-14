@@ -1,3 +1,4 @@
+import { LabelsServiceService } from './labels-service.service';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -48,7 +49,7 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule,
     NgbModule,FormsModule
   ],
-  providers: [VariablesGlobales],
+  providers: [VariablesGlobales,LabelsServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

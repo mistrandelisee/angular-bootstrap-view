@@ -7,8 +7,8 @@ export class config {
    * return the server base endpoint
    */
   public getURL() :string{
-    // return this.url_dev;
-    return this.url_prod;
+    return this.url_dev;
+    // return this.url_prod;
 
   }
 
