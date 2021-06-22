@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
     this.toastmessage='Save successfully';
 
     let data=this.person.getNewRegistrationData(this.fileList.pop(),this.account);
-    /*to uncomment
+    ///*to uncomment
     this.adhservice.newAdherant(data).subscribe(
       data=>{
         console.log(data);
@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
 
       }
     )
-    */
+    //*/
       console.log(data);
 
     return true;
