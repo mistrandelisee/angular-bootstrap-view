@@ -87,7 +87,7 @@ export class AppComponent {
 
     document.cookie = `learningApp-User=; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
 
-    this.AdherantService.authentification({token:cookieValue,close:true}).subscribe(
+    this.AdherantService.authentification({token:null,close:true,username:this.variablesGlobales.connectedUser.username}).subscribe(
       data=>{
         if (data.OK) {
           this.user=new human();
@@ -96,6 +96,7 @@ export class AppComponent {
         }
         else{
           console.log(data);
+          alert('An error occur')
           this.errMsg={warning:true,msg:data.KO};
         }
       },

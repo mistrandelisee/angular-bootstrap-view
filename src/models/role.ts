@@ -9,7 +9,7 @@ import { element } from 'protractor';
       this.id=element.id;
       this.name=element.name;
       this.description=element.description;
-      if (element.name==='Admin') {
+      if (element.name==='user') {
         this.checked=true;
       }
     }

@@ -114,7 +114,7 @@
       <div class="form-check">
         <label class="form-check-label">
           <input type="checkbox" class="form-check-input"  name="{{role.name}}" id="{{role.name}}"
-          [(ngModel)]="role.checked" [value]="role.checked" [disabled]="(role.name=='RL-2')?true:false">
+          [(ngModel)]="role.checked" [value]="role.checked" [disabled]="role.checked">
           {{role.name}}
         </label>
       </div>

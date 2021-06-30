@@ -6,6 +6,7 @@ import { role } from "./role";
 
   export class human  {
     id: number=0;
+    companyId: number=0;
     fees: number=0;
     username:string=`ADH${new Date().getMilliseconds()}@koweit.net`;
     firstName: string='';
@@ -40,12 +41,13 @@ import { role } from "./role";
     setPK(){
       return `AD- ${new Date().getMilliseconds()}`;
     }
-    getNewFormData(){
+    getNewFormData(company:number){
       let rolechecked:number[]=[]
       this.roles.forEach(role => {
         if(role.checked) rolechecked.push(role.id)
       });
       let {id,roles,fullName,...user}=this;
+      user.companyId=company;
       let formData={
         user,role:rolechecked
       }

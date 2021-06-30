@@ -12,7 +12,7 @@ import { human } from 'src/models/human';
 export class HomeComponent implements OnInit {
   public isMenuCollapsed = true;
   closeResult = '';
-  active:number=3;//activated nav
+  active:number=1;//activated nav
   disabled = true;
   person:human;
   constructor(private modalService: NgbModal,public modal: NgbActiveModal) {

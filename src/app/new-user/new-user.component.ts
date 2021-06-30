@@ -3,6 +3,7 @@ import { AdherantService } from './../adherant.service';
 import { Component, EventEmitter, OnInit, Output,Input } from '@angular/core';
 import { human } from './../../models/human';
 import { role } from './../../models/role';
+import { VariablesGlobales } from '../VariablesGlobales';
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
@@ -17,7 +18,9 @@ export class NewUserComponent implements OnInit {
   toastdelay=5000;
   @Output() closeNewPerson=new EventEmitter<any>();
   @Input() roles:role[];
-  constructor(private adhservice :AdherantService,public label:LabelsServiceService) {
+  constructor(private adhservice :AdherantService,
+    public label:LabelsServiceService,
+    private variablesGlobales:VariablesGlobales) {
     this.roles=[];
     this.person=new human();
     console.log('roles comstruct');
@@ -38,7 +41,7 @@ export class NewUserComponent implements OnInit {
     this.person.roles=this.roles;
     // this.toastmessage=JSON.stringify(this.person);
     this.toastmessage='Save successfully';
-    let data=this.person.getNewFormData();
+    let data=this.person.getNewFormData(this.variablesGlobales.connectedUser.companyId);
     this.adhservice.newAdherant(data).subscribe(
       data=>{
         console.log(data);
